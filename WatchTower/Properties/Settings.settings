@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WatchTower.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MoviePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ws</Value>
+    </Setting>
+    <Setting Name="EpisodePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ws\bolt</Value>
+    </Setting>
+    <Setting Name="ShareMoviePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShareEpisodePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
