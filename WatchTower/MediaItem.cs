@@ -45,8 +45,8 @@ namespace WatchTower
             sourceDir = AEspFolder;
             subdirEntries = Directory.GetDirectories(sourceDir);
             foreach (string seriesFolder in subdirEntries)
-                foreach (string sesionFolder in Directory.GetDirectories(seriesFolder))
-                    foreach (string EpisodeFile in Directory.GetFiles(sesionFolder))
+                //foreach (string sesionFolder in Directory.GetDirectories(seriesFolder))
+                foreach (string EpisodeFile in Directory.GetFiles(seriesFolder))
                     {
                         FileInfo fi = new FileInfo(EpisodeFile);
                         MediaItem Eps = new MediaItem { Name = fi.Name, FullPath = fi.FullName, Type = MediaType.Episode, DateAdded = fi.LastWriteTimeUtc };
