@@ -50,9 +50,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(14, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 41);
+            this.button1.Size = new System.Drawing.Size(155, 48);
             this.button1.TabIndex = 0;
             this.button1.Text = "Update List";
             this.button1.UseVisualStyleBackColor = true;
@@ -65,19 +65,19 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 59);
+            this.tabControl1.Location = new System.Drawing.Point(14, 68);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(783, 422);
+            this.tabControl1.Size = new System.Drawing.Size(913, 487);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.listViewMovies);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(775, 396);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(905, 459);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Movies";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -92,12 +92,13 @@
             this.listViewMovies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColName,
             this.ColDate});
-            this.listViewMovies.Location = new System.Drawing.Point(6, 6);
+            this.listViewMovies.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewMovies.Location = new System.Drawing.Point(7, 7);
             this.listViewMovies.MenuLabelColumns = "";
             this.listViewMovies.MenuLabelGroupBy = "";
             this.listViewMovies.Name = "listViewMovies";
             this.listViewMovies.ShowGroups = false;
-            this.listViewMovies.Size = new System.Drawing.Size(763, 384);
+            this.listViewMovies.Size = new System.Drawing.Size(889, 444);
             this.listViewMovies.SortGroupItemsByPrimaryColumn = false;
             this.listViewMovies.TabIndex = 10;
             this.listViewMovies.UseCompatibleStateImageBehavior = false;
@@ -128,10 +129,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.listViewEps);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(775, 396);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(905, 459);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Episodes";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -146,12 +147,13 @@
             this.listViewEps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.colEpsDate});
-            this.listViewEps.Location = new System.Drawing.Point(6, 6);
+            this.listViewEps.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewEps.Location = new System.Drawing.Point(7, 7);
             this.listViewEps.MenuLabelColumns = "";
             this.listViewEps.MenuLabelGroupBy = "";
             this.listViewEps.Name = "listViewEps";
             this.listViewEps.ShowGroups = false;
-            this.listViewEps.Size = new System.Drawing.Size(760, 338);
+            this.listViewEps.Size = new System.Drawing.Size(886, 397);
             this.listViewEps.SortGroupItemsByPrimaryColumn = false;
             this.listViewEps.TabIndex = 11;
             this.listViewEps.UseCompatibleStateImageBehavior = false;
@@ -179,9 +181,9 @@
             // 
             // butShare
             // 
-            this.butShare.Location = new System.Drawing.Point(431, 12);
+            this.butShare.Location = new System.Drawing.Point(503, 14);
             this.butShare.Name = "butShare";
-            this.butShare.Size = new System.Drawing.Size(95, 40);
+            this.butShare.Size = new System.Drawing.Size(111, 46);
             this.butShare.TabIndex = 12;
             this.butShare.Text = "Share";
             this.butShare.UseVisualStyleBackColor = true;
@@ -189,9 +191,9 @@
             // 
             // butSettings
             // 
-            this.butSettings.Location = new System.Drawing.Point(681, 12);
+            this.butSettings.Location = new System.Drawing.Point(794, 14);
             this.butSettings.Name = "butSettings";
-            this.butSettings.Size = new System.Drawing.Size(114, 23);
+            this.butSettings.Size = new System.Drawing.Size(133, 27);
             this.butSettings.TabIndex = 13;
             this.butSettings.Text = "Settings";
             this.butSettings.UseVisualStyleBackColor = true;
@@ -199,13 +201,14 @@
             // 
             // WatchTower
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 493);
+            this.ClientSize = new System.Drawing.Size(941, 569);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.butShare);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
+            this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WatchTower";
             this.Text = "Form1";
