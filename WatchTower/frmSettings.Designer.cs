@@ -44,14 +44,19 @@
             this.textShareEpsPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.NumUDFontSize = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumUDFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // butSaveSettings
             // 
             this.butSaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSaveSettings.Location = new System.Drawing.Point(438, 196);
+            this.butSaveSettings.Location = new System.Drawing.Point(438, 252);
             this.butSaveSettings.Name = "butSaveSettings";
             this.butSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.butSaveSettings.TabIndex = 14;
@@ -207,11 +212,40 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Episodes";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.NumUDFontSize);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Location = new System.Drawing.Point(12, 190);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(501, 56);
+            this.groupBox3.TabIndex = 18;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Font";
+            // 
+            // NumUDFontSize
+            // 
+            this.NumUDFontSize.Location = new System.Drawing.Point(63, 19);
+            this.NumUDFontSize.Name = "NumUDFontSize";
+            this.NumUDFontSize.Size = new System.Drawing.Size(120, 20);
+            this.NumUDFontSize.TabIndex = 28;
+            this.NumUDFontSize.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Font Size";
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 231);
+            this.ClientSize = new System.Drawing.Size(525, 287);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.butSaveSettings);
@@ -223,6 +257,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumUDFontSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,6 +282,9 @@
         private System.Windows.Forms.TextBox textShareEpsPath;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown NumUDFontSize;
+        private System.Windows.Forms.Label label5;
 
     }
 }

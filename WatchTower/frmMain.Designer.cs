@@ -38,9 +38,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listViewEps = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.colEpsName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.colEpsSeasonNum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.colEpsNum = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colEpsDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.butShare = new System.Windows.Forms.Button();
             this.butSettings = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listViewMovies)).BeginInit();
@@ -50,7 +54,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 14);
+            this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 48);
             this.button1.TabIndex = 0;
@@ -76,7 +80,7 @@
             this.tabPage1.Controls.Add(this.listViewMovies);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(905, 459);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Movies";
@@ -102,8 +106,7 @@
             this.listViewMovies.SortGroupItemsByPrimaryColumn = false;
             this.listViewMovies.TabIndex = 10;
             this.listViewMovies.UseCompatibleStateImageBehavior = false;
-            this.listViewMovies.View = System.Windows.Forms.View.Details;
-            this.listViewMovies.SelectedIndexChanged += new System.EventHandler(this.listViewMovies_SelectedIndexChanged);
+            this.listViewMovies.View = System.Windows.Forms.View.Details;            
             this.listViewMovies.DoubleClick += new System.EventHandler(this.listViewMovies_DoubleClick);
             // 
             // ColName
@@ -131,7 +134,7 @@
             this.tabPage2.Controls.Add(this.listViewEps);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(905, 459);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Episodes";
@@ -140,34 +143,75 @@
             // listViewEps
             // 
             this.listViewEps.AllColumns.Add(this.olvColumn1);
+            this.listViewEps.AllColumns.Add(this.colEpsName);
+            this.listViewEps.AllColumns.Add(this.colEpsSeasonNum);
+            this.listViewEps.AllColumns.Add(this.colEpsNum);
             this.listViewEps.AllColumns.Add(this.colEpsDate);
+            this.listViewEps.AlternateRowBackColor = System.Drawing.Color.LightGray;
             this.listViewEps.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewEps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
+            this.colEpsName,
+            this.colEpsSeasonNum,
+            this.colEpsNum,
             this.colEpsDate});
+            this.listViewEps.Cursor = System.Windows.Forms.Cursors.Default;
             this.listViewEps.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewEps.HighlightBackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.listViewEps.Location = new System.Drawing.Point(7, 7);
             this.listViewEps.MenuLabelColumns = "";
             this.listViewEps.MenuLabelGroupBy = "";
+            this.listViewEps.MultiSelect = false;
             this.listViewEps.Name = "listViewEps";
+            this.listViewEps.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
             this.listViewEps.ShowGroups = false;
-            this.listViewEps.Size = new System.Drawing.Size(886, 397);
+            this.listViewEps.Size = new System.Drawing.Size(886, 446);
             this.listViewEps.SortGroupItemsByPrimaryColumn = false;
             this.listViewEps.TabIndex = 11;
             this.listViewEps.UseCompatibleStateImageBehavior = false;
+            this.listViewEps.UseFiltering = true;
+            this.listViewEps.UseHotItem = true;
+            this.listViewEps.UseTranslucentHotItem = true;
+            this.listViewEps.UseTranslucentSelection = true;
             this.listViewEps.View = System.Windows.Forms.View.Details;
             this.listViewEps.DoubleClick += new System.EventHandler(this.listViewEps_DoubleClick);
             // 
             // olvColumn1
             // 
-            this.olvColumn1.AspectName = "Name";
+            this.olvColumn1.AspectName = "SeriesName";
             this.olvColumn1.CellPadding = null;
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
-            this.olvColumn1.Text = "Name";
-            this.olvColumn1.Width = 359;
+            this.olvColumn1.Text = "Series";
+            this.olvColumn1.Width = 292;
+            // 
+            // colEpsName
+            // 
+            this.colEpsName.AspectName = "EpisodeName";
+            this.colEpsName.CellPadding = null;
+            this.colEpsName.FillsFreeSpace = true;
+            this.colEpsName.IsEditable = false;
+            this.colEpsName.Text = "Name";
+            // 
+            // colEpsSeasonNum
+            // 
+            this.colEpsSeasonNum.AspectName = "SeasonNum";
+            this.colEpsSeasonNum.AspectToStringFormat = "S{0:00}";
+            this.colEpsSeasonNum.CellPadding = null;
+            this.colEpsSeasonNum.IsEditable = false;
+            this.colEpsSeasonNum.Text = "";
+            this.colEpsSeasonNum.Width = 51;
+            // 
+            // colEpsNum
+            // 
+            this.colEpsNum.AspectName = "EpisodeNum";
+            this.colEpsNum.AspectToStringFormat = "E{0:00}";
+            this.colEpsNum.CellPadding = null;
+            this.colEpsNum.IsEditable = false;
+            this.colEpsNum.Text = "Episode";
+            this.colEpsNum.Width = 104;
             // 
             // colEpsDate
             // 
@@ -199,11 +243,22 @@
             this.butSettings.UseVisualStyleBackColor = true;
             this.butSettings.Click += new System.EventHandler(this.butSettings_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(246, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // WatchTower
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 569);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.butShare);
             this.Controls.Add(this.tabControl1);
@@ -236,6 +291,10 @@
         private BrightIdeasSoftware.OLVColumn colEpsDate;
         private System.Windows.Forms.Button butShare;
         private System.Windows.Forms.Button butSettings;
+        private BrightIdeasSoftware.OLVColumn colEpsNum;
+        private BrightIdeasSoftware.OLVColumn colEpsSeasonNum;
+        private BrightIdeasSoftware.OLVColumn colEpsName;
+        private System.Windows.Forms.Button button2;
     }
 }
 

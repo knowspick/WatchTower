@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchTower", "WatchTower\WatchTower.csproj", "{8FBD0591-1422-4D99-BCC1-D7CA4D88047F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView2010", "C:\Downloads\ObjectListView-2.6.0\ObjectListViewDemo\ObjectListView\ObjectListView2010.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{8FBD0591-1422-4D99-BCC1-D7CA4D88047F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBD0591-1422-4D99-BCC1-D7CA4D88047F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBD0591-1422-4D99-BCC1-D7CA4D88047F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18FEDA0C-D147-4286-B39A-01204808106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18FEDA0C-D147-4286-B39A-01204808106A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

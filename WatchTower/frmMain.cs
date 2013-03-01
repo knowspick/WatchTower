@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using BrightIdeasSoftware;
+using System.Data.SQLite;
+using WatchTower.Entities;
 
 namespace WatchTower
 {
@@ -19,9 +21,12 @@ namespace WatchTower
             InitializeComponent();
         }
 
+        public WatchTowerEF WTEntities;
+       
+
         List<MediaItem> MediaList = new List<MediaItem>();
         List<MediaItem> MovieList = new List<MediaItem>();
-        List<MediaItem> EpsList = new List<MediaItem>();
+        List<EpisodeItem> EpsList = new List<EpisodeItem>();
 
         private void PoplateList()
         {
@@ -34,6 +39,13 @@ namespace WatchTower
             listViewEps.Sort(colEpsDate, SortOrder.Descending);
         }
 
+        public void SetFontSize(int AFontSize)
+        {
+            Font NewFont = new Font(listViewMovies.Font.Name, AFontSize, listViewMovies.Font.Style, listViewMovies.Font.Unit);
+            listViewMovies.Font = NewFont;
+            listViewEps.Font = NewFont;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             PoplateList();
@@ -41,6 +53,11 @@ namespace WatchTower
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            WTEntities = new WatchTowerEF();
+            System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
+
+
+            SetFontSize(Properties.Settings.Default.FontSize);
             new MediaFunctions().LoadMediaFromFolder(Properties.Settings.Default.MoviePath, Properties.Settings.Default.EpisodePath, ref MovieList, ref EpsList, ref MediaList);
             PoplateList();
         }
@@ -73,8 +90,9 @@ namespace WatchTower
 
 
         private void butSettings_Click(object sender, EventArgs e)
-        {
-            new frmSettings().ShowDialog();
+        { 
+            frmSettings fSettings = new frmSettings(){MainForm = this} ;
+            fSettings.ShowDialog();
         }
 
 
@@ -84,8 +102,17 @@ namespace WatchTower
             MessageBox.Show("Sharing Done");
         }
 
-        private void listViewMovies_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void button2_Click(object sender, EventArgs e)
+        {     
+            
+          /*              
+            watchTowerData.Serieses.Add(new Series{
+                Name = "SeriesTest1"
+            });
+            WatchTowerData.SaveChanges();
+            */
+
+            var s = WTEntities.Series.Find(1);
 
         }
     }

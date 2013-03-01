@@ -12,6 +12,8 @@ namespace WatchTower
 {
     public partial class frmSettings : Form
     {
+        public WatchTower MainForm;
+
         public frmSettings()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace WatchTower
             Properties.Settings.Default.EpisodePath = textEpsPath.Text;
             Properties.Settings.Default.ShareEpisodePath = textShareEpsPath.Text;
             Properties.Settings.Default.ShareMoviePath = textShareMoviePath.Text;
+            Properties.Settings.Default.FontSize = Decimal.ToInt32(NumUDFontSize.Value);
             Properties.Settings.Default.Save();
         }
 
@@ -32,6 +35,7 @@ namespace WatchTower
             textEpsPath.Text = Properties.Settings.Default.EpisodePath;
             textShareEpsPath.Text = Properties.Settings.Default.ShareEpisodePath;
             textShareMoviePath.Text = Properties.Settings.Default.ShareMoviePath;
+            NumUDFontSize.Value = Properties.Settings.Default.FontSize;
         }
 
         private void frmSettings_Load(object sender, EventArgs e)
@@ -72,6 +76,11 @@ namespace WatchTower
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 textMoviePath.Text = folderBrowserDialog.SelectedPath;
 
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            MainForm.SetFontSize(Decimal.ToInt32(NumUDFontSize.Value)); 
         }
 
 

@@ -41,7 +41,7 @@ namespace WatchTower
         {
             List<MediaItem> ShareList = new List<MediaItem>();
             List<MediaItem> temp = new List<MediaItem>();
-            List<MediaItem> temp2 = new List<MediaItem>();
+            List<EpisodeItem> temp2 = new List<EpisodeItem>();
             new MediaFunctions().LoadMediaFromFolder(
                 Properties.Settings.Default.ShareMoviePath, Properties.Settings.Default.ShareEpisodePath, ref temp, ref temp2, ref ShareList);
             temp = null;
