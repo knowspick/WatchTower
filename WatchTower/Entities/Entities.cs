@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchTower.Entities
 {
-    public enum enumSeriesInterest { Unrated, Interested, Uninterest };  
+    public enum enumLikeStatus { Unrated, Interested, Uninterest };  
 
     public class Episode
     {
@@ -17,6 +17,9 @@ namespace WatchTower.Entities
         public Int64 EpisodeId      { get; set; }
         [Required]
         public Int64 SeriesId       { get; set; }
+
+        public virtual Series Series { get; set; }
+
         [Required]
         public string Name          { get; set; }
         [Required]
@@ -24,31 +27,33 @@ namespace WatchTower.Entities
         [Required]
         public int EpisodeNo        { get; set; }
         public string FileFullPath { get; set; }
-        public DateTime DateAdded    { get; set; }
+        [Required]
+        public DateTime DateAddedToCollection { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Required]
         public DateTime LastUpdated { get; set; }
     }
 
     public class Series
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SeriesId { get; set; }
+        public Int64 SeriesId { get; set; }
         [Required]
         public string Name  { get; set; }
+        public virtual ICollection<Episode> Episodes { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [Required]
         public DateTime LastUpdated { get; set; }
     }
 
     public class Profile
     {
         [Key]
-        public int ProfielId { get; set; }
+        public Int64 ProfielId { get; set; }
         public string Name   { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
@@ -56,17 +61,17 @@ namespace WatchTower.Entities
 
     public class ProfileSeriesRel
     {
-        public int ProfileID           { get; set; }
-        public int SeriesID            { get; set; }
-        public enumSeriesInterest Interest { get; set; } //todo redefine
+        public Int64 ProfileID { get; set; }
+        public Int64 SeriesID { get; set; }
+        public enumLikeStatus LikeStatus { get; set; } //todo redefine
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
     }
 
     public class ProfileEpisodeRel
     {
-        public int ProfileID { get; set; }
-        public int EpisodeId { get; set; }
+        public Int64 ProfileID { get; set; }
+        public Int64 EpisodeId { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
     }

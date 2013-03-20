@@ -23,18 +23,16 @@ namespace WatchTower
 
         public WatchTowerEF WTEntities;
        
-
-        List<MediaItem> MediaList = new List<MediaItem>();
-        List<MediaItem> MovieList = new List<MediaItem>();
-        List<EpisodeItem> EpsList = new List<EpisodeItem>();
-
         private void PoplateList()
         {
-            listViewMovies.ClearObjects();
-            listViewMovies.SetObjects(MovieList);
-            listViewMovies.Sort(ColDate, SortOrder.Descending);
+            //Movies
+            //listViewMovies.ClearObjects();
+            //listViewMovies.SetObjects(MovieList);
+            //listViewMovies.Sort(ColDate, SortOrder.Descending);
 
+            //Episodes
             listViewEps.ClearObjects();
+            List<Episode> EpsList = MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
             listViewEps.SetObjects(EpsList);
             listViewEps.Sort(colEpsDate, SortOrder.Descending);
         }
@@ -56,14 +54,14 @@ namespace WatchTower
             WTEntities = new WatchTowerEF();
             System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
 
+            SetFontSize(Properties.Settings.Default.FontSize);            
 
-            SetFontSize(Properties.Settings.Default.FontSize);
-            new MediaFunctions().LoadMediaFromFolder(Properties.Settings.Default.MoviePath, Properties.Settings.Default.EpisodePath, ref MovieList, ref EpsList, ref MediaList);
             PoplateList();
         }
 
         private void listViewMovies_DoubleClick(object sender, EventArgs e)
         {
+            /*
             MediaItem MediaObj = listViewMovies.SelectedObjects[0] as MediaItem;
             string[] files = Directory.GetFiles(MediaObj.FullPath);
             if (files.Length == 2)
@@ -80,12 +78,15 @@ namespace WatchTower
             }
             else
                 System.Diagnostics.Process.Start(MediaObj.FullPath);
+             */
         }
 
         private void listViewEps_DoubleClick(object sender, EventArgs e)
         {
+            /*
             MediaItem MediaObj = listViewEps.SelectedObjects[0] as MediaItem;
             System.Diagnostics.Process.Start(MediaObj.FullPath);
+             */
         }
 
 
@@ -98,21 +99,30 @@ namespace WatchTower
 
         private void butShare_Click(object sender, EventArgs e)
         {
-            new ShareMediaFunctions().ShareMedia(MediaList);
             MessageBox.Show("Sharing Done");
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {     
-            
-          /*              
-            watchTowerData.Serieses.Add(new Series{
-                Name = "SeriesTest1"
-            });
-            WatchTowerData.SaveChanges();
+        {
+            /*
+            Episode eps = new Episode(){ 
+                SeriesId = 1,
+                SeasonNo = 1,
+                EpisodeNo = 1,
+                Name = "newEps",
+                FileFullPath = "",
+                DateAddedToCollection = DateTime.Now,
+                LastUpdated = DateTime.Now
+            };
+            WTEntities.Episodes.Add(eps);
+            WTEntities.SaveChanges();
             */
+            MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
 
-            var s = WTEntities.Series.Find(1);
+        }
+
+        private void listViewEps_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

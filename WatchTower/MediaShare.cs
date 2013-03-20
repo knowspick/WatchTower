@@ -9,7 +9,7 @@ namespace WatchTower
 {
     class ShareMediaFunctions
     {       
-        private long SizeOfFolder(string AFolderPath)
+    /*    private long SizeOfFolder(string AFolderPath)
         {
             long folderSize = 0;
             foreach (string file in Directory.GetFiles(AFolderPath))
@@ -112,7 +112,7 @@ namespace WatchTower
             }
 
 
-        }
+        } */
 
-    }
+    } 
 }

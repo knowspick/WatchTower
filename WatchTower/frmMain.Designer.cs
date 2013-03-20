@@ -106,7 +106,7 @@
             this.listViewMovies.SortGroupItemsByPrimaryColumn = false;
             this.listViewMovies.TabIndex = 10;
             this.listViewMovies.UseCompatibleStateImageBehavior = false;
-            this.listViewMovies.View = System.Windows.Forms.View.Details;            
+            this.listViewMovies.View = System.Windows.Forms.View.Details;
             this.listViewMovies.DoubleClick += new System.EventHandler(this.listViewMovies_DoubleClick);
             // 
             // ColName
@@ -176,11 +176,12 @@
             this.listViewEps.UseTranslucentHotItem = true;
             this.listViewEps.UseTranslucentSelection = true;
             this.listViewEps.View = System.Windows.Forms.View.Details;
+            this.listViewEps.SelectedIndexChanged += new System.EventHandler(this.listViewEps_SelectedIndexChanged);
             this.listViewEps.DoubleClick += new System.EventHandler(this.listViewEps_DoubleClick);
             // 
             // olvColumn1
             // 
-            this.olvColumn1.AspectName = "SeriesName";
+            this.olvColumn1.AspectName = "Series.Name";
             this.olvColumn1.CellPadding = null;
             this.olvColumn1.Groupable = false;
             this.olvColumn1.IsEditable = false;
@@ -189,7 +190,7 @@
             // 
             // colEpsName
             // 
-            this.colEpsName.AspectName = "EpisodeName";
+            this.colEpsName.AspectName = "Name";
             this.colEpsName.CellPadding = null;
             this.colEpsName.FillsFreeSpace = true;
             this.colEpsName.IsEditable = false;
@@ -197,7 +198,7 @@
             // 
             // colEpsSeasonNum
             // 
-            this.colEpsSeasonNum.AspectName = "SeasonNum";
+            this.colEpsSeasonNum.AspectName = "SeasonNo";
             this.colEpsSeasonNum.AspectToStringFormat = "S{0:00}";
             this.colEpsSeasonNum.CellPadding = null;
             this.colEpsSeasonNum.IsEditable = false;
@@ -206,7 +207,7 @@
             // 
             // colEpsNum
             // 
-            this.colEpsNum.AspectName = "EpisodeNum";
+            this.colEpsNum.AspectName = "EpisodeNo";
             this.colEpsNum.AspectToStringFormat = "E{0:00}";
             this.colEpsNum.CellPadding = null;
             this.colEpsNum.IsEditable = false;
@@ -215,7 +216,7 @@
             // 
             // colEpsDate
             // 
-            this.colEpsDate.AspectName = "DateAdded";
+            this.colEpsDate.AspectName = "DateAddedToCollection";
             this.colEpsDate.AspectToStringFormat = "{0:dd/MM/yyyy   HH:mm:ss}";
             this.colEpsDate.CellPadding = null;
             this.colEpsDate.IsEditable = false;
