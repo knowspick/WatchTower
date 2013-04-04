@@ -32,7 +32,16 @@ namespace WatchTower
 
             //Episodes
             listViewEps.ClearObjects();
+
+            Profile pro = WTEntities.Profiles.Where<Profile>(p => p.Name == comProfiles.Text).FirstOrDefault<Profile>();            
+            
+
+
             List<Episode> EpsList = MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
+            
+            //pro.ProfileSeriesRels.Where(p => p.WantToWatch == true).Select(
+            //EpsList.Series.Where<Episode>(eps => eps.ProfileSeriesRels. 
+
             listViewEps.SetObjects(EpsList);
             listViewEps.Sort(colEpsDate, SortOrder.Descending);
         }
@@ -54,9 +63,10 @@ namespace WatchTower
             WTEntities = new WatchTowerEF();
             System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
 
-            SetFontSize(Properties.Settings.Default.FontSize);            
+            SetFontSize(Properties.Settings.Default.FontSize);
 
-            PoplateList();
+            foreach (Profile profile in WTEntities.Profiles)
+                comProfiles.Items.Add(profile.Name);
         }
 
         private void listViewMovies_DoubleClick(object sender, EventArgs e)
@@ -121,17 +131,5 @@ namespace WatchTower
 
         }
 
-        private void listViewEps_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            frmProfiles fProfiles = new frmProfiles();
-            fProfiles.WTE = WTEntities;
-            fProfiles.ShowDialog();
-            WTEntities.SaveChanges();
-        }
     }
 }

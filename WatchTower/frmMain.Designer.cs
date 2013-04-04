@@ -45,7 +45,7 @@
             this.butShare = new System.Windows.Forms.Button();
             this.butSettings = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.comProfiles = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listViewMovies)).BeginInit();
@@ -177,7 +177,6 @@
             this.listViewEps.UseTranslucentHotItem = true;
             this.listViewEps.UseTranslucentSelection = true;
             this.listViewEps.View = System.Windows.Forms.View.Details;
-            this.listViewEps.SelectedIndexChanged += new System.EventHandler(this.listViewEps_SelectedIndexChanged);
             this.listViewEps.DoubleClick += new System.EventHandler(this.listViewEps_DoubleClick);
             // 
             // olvColumn1
@@ -237,7 +236,7 @@
             // 
             // butSettings
             // 
-            this.butSettings.Location = new System.Drawing.Point(794, 14);
+            this.butSettings.Location = new System.Drawing.Point(730, 59);
             this.butSettings.Name = "butSettings";
             this.butSettings.Size = new System.Drawing.Size(133, 27);
             this.butSettings.TabIndex = 13;
@@ -255,22 +254,21 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // comProfiles
             // 
-            this.button3.Location = new System.Drawing.Point(364, 25);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Profiles";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.comProfiles.FormattingEnabled = true;
+            this.comProfiles.Location = new System.Drawing.Point(779, 12);
+            this.comProfiles.Name = "comProfiles";
+            this.comProfiles.Size = new System.Drawing.Size(148, 23);
+            this.comProfiles.TabIndex = 15;
+            this.comProfiles.Text = "UnSelected";
             // 
-            // WatchTower
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(941, 569);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.comProfiles);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.butShare);
@@ -278,7 +276,7 @@
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "WatchTower";
+            this.Name = "frmMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
@@ -308,7 +306,7 @@
         private BrightIdeasSoftware.OLVColumn colEpsSeasonNum;
         private BrightIdeasSoftware.OLVColumn colEpsName;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comProfiles;
     }
 }
 

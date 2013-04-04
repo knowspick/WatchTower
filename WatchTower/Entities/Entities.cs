@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchTower.Entities
 {
-    public enum enumLikeStatus { Unrated, Interested, Uninterest };  
+    public enum enumWantToWatch { Unrated, WantToWatch, Dont };  
 
     public class Episode
     {
@@ -26,13 +26,13 @@ namespace WatchTower.Entities
         public int SeasonNo         { get; set; }
         [Required]
         public int EpisodeNo        { get; set; }
-        public string FileFullPath { get; set; }
+        public string FileFullPath  { get; set; }
         [Required]
         public DateTime DateAddedToCollection { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
     }
 
@@ -43,42 +43,64 @@ namespace WatchTower.Entities
         [Required]
         public string Name  { get; set; }
         public virtual ICollection<Episode> Episodes { get; set; }
+        public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
     }
 
     public class Profile
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 ProfielId { get; set; }
+        public Int64 ProfileId { get; set; }
         [Required]
         public string Name   { get; set; }
+        public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
 
     }
 
     public class ProfileSeriesRel
     {
-        public Int64 ProfileID { get; set; }
-        public Int64 SeriesID { get; set; }
-        public enumLikeStatus LikeStatus { get; set; } //todo redefine
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 ProfileSeriesRelId { get; set; }
+        [Required]
+        public Int64 ProfileId { get; set; }
+        [Required]
+        public Int64 SeriesId { get; set; }
+        [Required]
+        public enumWantToWatch WantToWatch { get; set; }
+
+        public virtual Profile Profile { get; set; }
+        public virtual Series Series { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastUpdated { get; set; }
     }
 
     public class ProfileEpisodeRel
     {
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 ProfileEpisodeRelId { get; set; }
+        [Required]
         public Int64 ProfileID { get; set; }
+        [Required]
         public Int64 EpisodeId { get; set; }
+        [Required]
+        public Boolean Watched { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastUpdated { get; set; }
     }
 
     public class WatchTowerEF : DbContext

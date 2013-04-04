@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 using WatchTower.Entities;
 
 namespace WatchTower
@@ -31,17 +32,30 @@ namespace WatchTower
                     {
                         SeriesItem = WTData.Series.Add(new Entities.Series
                         {                        
-                            Name = SeriesName,
-                            LastUpdated = DateTime.Now
+                            Name = SeriesName
                         });
                         WTData.SaveChanges(); //save to get ID from DB                        
                     }
-                    foreach (string EpisodeFile in Directory.GetFiles(seriesFolder))
+
+                    //iqnore files
+                    var filteredFiles = Directory
+                            .GetFiles(seriesFolder)
+                            .Where(file => file.ToLower().Contains("thumbs.db") == false)
+                            .ToList();
+
+                    foreach (string EpisodeFile in filteredFiles)
                     {                        
                         FileInfo fi = new FileInfo(EpisodeFile);                         
                         //get file details
-                        string sLastPart = fi.Name.Substring(fi.Name.IndexOf(".S") + 2);
-                        int SeasonNo = int.Parse(sLastPart.Substring(0, 2));
+                        string sLastPart = fi.Name.Substring(fi.Name.IndexOf(".S") + 2);                        
+                        int SeasonNo;
+                        if (int.TryParse(sLastPart.Substring(0, 2), out SeasonNo))
+                            SeasonNo = int.Parse(sLastPart.Substring(0, 2));
+                        else
+                        {
+                            MessageBox.Show(fi.Name);
+                            continue;
+                        }
                         int EpisodeNo = int.Parse(sLastPart.Substring(3, 2));
                         string EpisodeName = sLastPart.Split('.')[1];
 
