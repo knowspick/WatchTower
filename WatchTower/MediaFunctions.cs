@@ -12,8 +12,8 @@ namespace WatchTower
     {
         //retuns a list episodes that exist on the drive
         static public List<Episode> UpdateEpisodesFromFolder(WatchTowerEF WTData)
-        {            
-            List<Episode> EpsListToDisplay = new List<Episode>();
+        {
+            List<Entities.Episode> EpsListToDisplay = new List<Entities.Episode>();
             string SeriesName = "";
             string sourceDir = Properties.Settings.Default.EpisodePath;
             string[] subdirEntries;
@@ -24,12 +24,13 @@ namespace WatchTower
                 {
                     //Get or create series
                     SeriesName = new DirectoryInfo(seriesFolder).Name;
-                    Series SeriesItem = WTData.Series.Where<Series>
-                        (s => s.Name == SeriesName).FirstOrDefault<Series>();
+
+                    Entities.Series SeriesItem = WTData.Series.Where<Entities.Series>
+                        (s => s.Name == SeriesName).FirstOrDefault<Entities.Series>();
                     if (SeriesItem == null)
                     {
-                        SeriesItem = WTData.Series.Add(new Series
-                        {
+                        SeriesItem = WTData.Series.Add(new Entities.Series
+                        {                        
                             Name = SeriesName,
                             LastUpdated = DateTime.Now
                         });
@@ -45,12 +46,13 @@ namespace WatchTower
                         string EpisodeName = sLastPart.Split('.')[1];
 
                         //get or create episode
-                        Episode EpsItem = WTData.Episodes.Where<Episode>
+                        Entities.Episode EpsItem = WTData.Episodes.Where<Entities.Episode>
                             (e => e.SeriesId == SeriesItem.SeriesId 
                                 && e.SeasonNo == SeasonNo
-                                && e.EpisodeNo == EpisodeNo).FirstOrDefault<Episode>();
+                                && e.EpisodeNo == EpisodeNo).FirstOrDefault<Entities.Episode>();
                         if (EpsItem == null)
-                            EpsItem = WTData.Episodes.Add(new Episode {
+                            EpsItem = WTData.Episodes.Add(new Episode
+                            {
                                 SeriesId = SeriesItem.SeriesId,
                                 Series = SeriesItem,
                                 Name = EpisodeName, 
@@ -59,7 +61,6 @@ namespace WatchTower
                                 FileFullPath = fi.FullName,
                                 DateAddedToCollection = fi.LastWriteTimeUtc 
                             });
-
                         EpsListToDisplay.Add(EpsItem);
                     }
                 }

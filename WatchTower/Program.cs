@@ -16,7 +16,7 @@ namespace WatchTower
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WatchTower());
+            Application.Run(new frmMain());
         }
     }
 }

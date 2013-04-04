@@ -52,11 +52,16 @@ namespace WatchTower.Entities
 
     public class Profile
     {
-        [Key]
+        [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 ProfielId { get; set; }
+        [Required]
         public string Name   { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
+        [Required]
+        public DateTime LastUpdated { get; set; }
+
     }
 
     public class ProfileSeriesRel
@@ -84,5 +89,6 @@ namespace WatchTower.Entities
         
         public DbSet<Episode> Episodes { get; set; }
         public DbSet<Series> Series { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

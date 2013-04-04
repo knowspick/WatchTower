@@ -12,7 +12,7 @@ namespace WatchTower
 {
     public partial class frmSettings : Form
     {
-        public WatchTower MainForm;
+        public frmMain MainForm;
 
         public frmSettings()
         {

@@ -14,9 +14,9 @@ using WatchTower.Entities;
 
 namespace WatchTower
 {
-    public partial class WatchTower : Form
+    public partial class frmMain : Form
     {
-        public WatchTower()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -124,6 +124,14 @@ namespace WatchTower
         private void listViewEps_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frmProfiles fProfiles = new frmProfiles();
+            fProfiles.WTE = WTEntities;
+            fProfiles.ShowDialog();
+            WTEntities.SaveChanges();
         }
     }
 }
