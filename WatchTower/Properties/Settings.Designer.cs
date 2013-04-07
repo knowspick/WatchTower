@@ -86,8 +86,7 @@ namespace WatchTower.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=P:\\WatchTower\\WatchTower\\WatchTower\\bin\\Debug\\WatchTower.db;version=3" +
-            ";legacy format=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=WatchTower.db;version=3;legacy format=True")]
         public string WatchTowerDB {
             get {
                 return ((string)(this["WatchTowerDB"]));

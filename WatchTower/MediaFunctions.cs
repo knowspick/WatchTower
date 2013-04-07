@@ -53,7 +53,7 @@ namespace WatchTower
                             SeasonNo = int.Parse(sLastPart.Substring(0, 2));
                         else
                         {
-                            MessageBox.Show(fi.Name);
+                            //MessageBox.Show(fi.Name);
                             continue;
                         }
                         int EpisodeNo = int.Parse(sLastPart.Substring(3, 2));
@@ -61,13 +61,13 @@ namespace WatchTower
 
                         //get or create episode
                         Entities.Episode EpsItem = WTData.Episodes.Where<Entities.Episode>
-                            (e => e.SeriesId == SeriesItem.SeriesId 
+                            (e => e.SeriesId == SeriesItem.Id 
                                 && e.SeasonNo == SeasonNo
                                 && e.EpisodeNo == EpisodeNo).FirstOrDefault<Entities.Episode>();
                         if (EpsItem == null)
                             EpsItem = WTData.Episodes.Add(new Episode
                             {
-                                SeriesId = SeriesItem.SeriesId,
+                                SeriesId = SeriesItem.Id,
                                 Series = SeriesItem,
                                 Name = EpisodeName, 
                                 SeasonNo = SeasonNo,

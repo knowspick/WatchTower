@@ -9,12 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WatchTower.Entities
 {
-    public enum enumWantToWatch { Unrated, WantToWatch, Dont };  
-
     public class Episode
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 EpisodeId      { get; set; }
+        public Int64 Id { get; set; }
+
         [Required]
         public Int64 SeriesId       { get; set; }
 
@@ -39,7 +38,8 @@ namespace WatchTower.Entities
     public class Series
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 SeriesId { get; set; }
+        public Int64 Id { get; set; }
+
         [Required]
         public string Name  { get; set; }
         public virtual ICollection<Episode> Episodes { get; set; }
@@ -54,7 +54,8 @@ namespace WatchTower.Entities
     public class Profile
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 ProfileId { get; set; }
+        public Int64 Id { get; set; }
+
         [Required]
         public string Name   { get; set; }
         public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
@@ -63,19 +64,19 @@ namespace WatchTower.Entities
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
-
     }
 
     public class ProfileSeriesRel
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 ProfileSeriesRelId { get; set; }
+        public Int64 Id { get; set; }
+
         [Required]
         public Int64 ProfileId { get; set; }
         [Required]
         public Int64 SeriesId { get; set; }
         [Required]
-        public enumWantToWatch WantToWatch { get; set; }
+        public Boolean WantToWatch { get ; set; }
 
         public virtual Profile Profile { get; set; }
         public virtual Series Series { get; set; }
@@ -89,7 +90,8 @@ namespace WatchTower.Entities
     public class ProfileEpisodeRel
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 ProfileEpisodeRelId { get; set; }
+        public Int64 Id { get; set; }
+
         [Required]
         public Int64 ProfileID { get; set; }
         [Required]
@@ -109,8 +111,9 @@ namespace WatchTower.Entities
             : base("Name=WatchTowerDB")
         { }
         
-        public DbSet<Episode> Episodes { get; set; }
-        public DbSet<Series> Series { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Episode> Episodes                      { get; set; }
+        public DbSet<Series> Series                         { get; set; }
+        public DbSet<Profile> Profiles                      { get; set; }
+        public DbSet<ProfileSeriesRel> ProfileSeriesRels    { get; set; }
     }
 }

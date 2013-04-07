@@ -22,6 +22,7 @@ namespace WatchTower
         }
 
         public WatchTowerEF WTEntities;
+        List<Episode> AvailableEpisodes = new List<Episode>();
        
         private void PoplateList()
         {
@@ -31,18 +32,23 @@ namespace WatchTower
             //listViewMovies.Sort(ColDate, SortOrder.Descending);
 
             //Episodes
-            listViewEps.ClearObjects();
+            listViewEps.ClearObjects();            
 
-            Profile pro = WTEntities.Profiles.Where<Profile>(p => p.Name == comProfiles.Text).FirstOrDefault<Profile>();            
-            
+            //get list of seiries don't want to watch 
+            List<ProfileSeriesRel> UnWantedSeriesRel = new List<ProfileSeriesRel>();
+            foreach (CheckBox chk in panelProfiles.Controls)
+            {
+                if (chk.Checked)                    
+                    UnWantedSeriesRel.AddRange(WTEntities.ProfileSeriesRels.Where<ProfileSeriesRel>(
+                        ps => ps.ProfileId == (Int64)chk.Tag && ps.WantToWatch == false
+                        ).ToList<ProfileSeriesRel>()
+                    );
+            }
+            List<Episode> WantedEpisode = new List<Episode>(AvailableEpisodes);
+            foreach (var item in UnWantedSeriesRel)
+                WantedEpisode.RemoveAll(e => e.SeriesId == item.SeriesId);
 
-
-            List<Episode> EpsList = MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
-            
-            //pro.ProfileSeriesRels.Where(p => p.WantToWatch == true).Select(
-            //EpsList.Series.Where<Episode>(eps => eps.ProfileSeriesRels. 
-
-            listViewEps.SetObjects(EpsList);
+            listViewEps.SetObjects(WantedEpisode);
             listViewEps.Sort(colEpsDate, SortOrder.Descending);
         }
 
@@ -65,8 +71,12 @@ namespace WatchTower
 
             SetFontSize(Properties.Settings.Default.FontSize);
 
-            foreach (Profile profile in WTEntities.Profiles)
-                comProfiles.Items.Add(profile.Name);
+            timerUpdateFiles.Interval = 1;
+        }
+
+        private void FilterMediaByProfile()
+        {
+
         }
 
         private void listViewMovies_DoubleClick(object sender, EventArgs e)
@@ -129,6 +139,49 @@ namespace WatchTower
             */
             MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
 
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            //set profile button
+            List<CheckBox> profilesBut = new List<CheckBox>();
+            foreach (Profile profile in WTEntities.Profiles)
+            {
+                CheckBox chkNew = new CheckBox();
+                chkNew.Text = profile.Name;
+                chkNew.Appearance = Appearance.Button;
+                chkNew.FlatStyle = FlatStyle.Flat;
+                chkNew.TextAlign = ContentAlignment.MiddleCenter;
+                chkNew.Tag = profile.Id;
+                chkNew.Height = panelProfiles.Height - 10;
+                chkNew.Left = 5 + chkNew.Left + (panelProfiles.Controls.Count * (chkNew.Width + 5));
+                chkNew.CheckedChanged += chkNew_CheckedChanged;
+                panelProfiles.Controls.Add(chkNew);
+                profilesBut.Add(chkNew);
+            }
+        }
+
+        void chkNew_CheckedChanged(object sender, EventArgs e)
+        {
+            PoplateList();
+        }
+
+        private void timerUpdateFiles_Tick(object sender, EventArgs e)
+        {
+            timerUpdateFiles.Interval = 1800000;
+            AvailableEpisodes = MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Episode eps = listViewEps.SelectedObjects[0] as Episode;
+            ProfileSeriesRel psr = WTEntities.ProfileSeriesRels.Where<ProfileSeriesRel>(
+                sr => sr.SeriesId == eps.Series.Id &&
+                    panelProfiles.Controls.Contains( sr.ProfileId
+                );
+            if (psr == null)
+                WTEntities.ProfileSeriesRels.Add(new ProfileSeriesRel(){ SeriesId = eps.Series.Id
+            psr.WantToWatch = false;
         }
 
     }
