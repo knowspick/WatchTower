@@ -115,5 +115,6 @@ namespace WatchTower.Entities
         public DbSet<Series> Series                         { get; set; }
         public DbSet<Profile> Profiles                      { get; set; }
         public DbSet<ProfileSeriesRel> ProfileSeriesRels    { get; set; }
+        public DbSet<ProfileEpisodeRel> ProfileEpisodeRels  { get; set; }
     }
 }
