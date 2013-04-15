@@ -24,6 +24,38 @@ namespace WatchTower
         public WatchTowerEF WTEntities;
         List<Episode> AvailableEpisodes = new List<Episode>();
         List<Profile> SelectedProfiles = new List<Profile>();
+
+        private class DisplaySeries
+        {
+            public Series series;
+            public List<Episode> epsisodes = new List<Episode>();
+        }
+
+        private void DisplayListInFlowLayout(List<Episode> list, FlowLayoutPanel flow)
+        {
+            List<DisplaySeries> DList = new List<DisplaySeries>();
+            foreach (Episode eps in list)
+            {
+                DisplaySeries DSeries = DList.SingleOrDefault(ds => ds.series.Id == eps.SeriesId);
+                if (DSeries == null)
+                {
+                    DSeries = new DisplaySeries() { series = eps.Series };
+                    DList.Add(DSeries);
+                }
+                DSeries.epsisodes.Add(eps);
+            }
+
+            //now display the items atlast
+            foreach (DisplaySeries ds in DList)
+            {
+                Panel Dpanel = new Panel();
+                Dpanel.Tag = ds;
+                Dpanel.Controls.Add(new Label() { Text = ds.series.Name });
+
+                flow.Controls.Add(Dpanel);
+            }
+        }
+
        
         private void PoplateList()
         {
@@ -34,9 +66,9 @@ namespace WatchTower
 
             //***** Filter Un WantedSeries *****    
             //the 3 lists we need to popluate
-            List<Episode>WantEps = new List<Episode>();
+            List<Episode>WantedEps = new List<Episode>();
             List<Episode>UnratedEps = new List<Episode>();
-            List<Episode>DontWantEps = new List<Episode>();
+            List<Episode>UnWantedEps = new List<Episode>();
 
             //get list accourding to selected profiles
             List<ProfileSeriesRel> WantSeriesRel = new List<ProfileSeriesRel>();
@@ -70,25 +102,23 @@ namespace WatchTower
             //get wanttowatch list
             foreach (var item in WantSeriesRel)
             {
-                WantEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
+                WantedEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
                 UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
             }
 
             //get don't want to watch list
             foreach (var item in UnWantedSeriesRel)
             {
-                DontWantEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
+                UnWantedEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
                 UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
             }
 
             //display the 3 list
-
-
-
-            listViewEps.ClearObjects();
-            listViewEps.SetObjects(WantedEpisode);
-            listViewEps.Sort(colEpsDate, SortOrder.Descending);
+            DisplayListInFlowLayout(WantedEps, flowWanted);
+            DisplayListInFlowLayout(UnratedEps, flowUnrated);
+            DisplayListInFlowLayout(UnWantedEps, flowUnWanted);
         }
+
 
         public void SetFontSize(int AFontSize)
         {

@@ -49,8 +49,13 @@
             this.panelProfiles = new System.Windows.Forms.Panel();
             this.timerUpdateFiles = new System.Windows.Forms.Timer(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowWanted = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelWanted = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.flowUnrated = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flowUnWanted = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listViewMovies)).BeginInit();
@@ -58,9 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.listViewEps)).BeginInit();
             this.popupMenu.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.SuspendLayout();
+            this.flowLayoutPanelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -84,7 +87,7 @@
             this.tabControl1.Location = new System.Drawing.Point(14, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(913, 496);
+            this.tabControl1.Size = new System.Drawing.Size(575, 229);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
@@ -253,7 +256,7 @@
             // 
             // butSettings
             // 
-            this.butSettings.Location = new System.Drawing.Point(556, 12);
+            this.butSettings.Location = new System.Drawing.Point(173, 12);
             this.butSettings.Name = "butSettings";
             this.butSettings.Size = new System.Drawing.Size(133, 27);
             this.butSettings.TabIndex = 13;
@@ -263,8 +266,9 @@
             // 
             // panelProfiles
             // 
+            this.panelProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelProfiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelProfiles.Location = new System.Drawing.Point(695, 12);
+            this.panelProfiles.Location = new System.Drawing.Point(354, 12);
             this.panelProfiles.Name = "panelProfiles";
             this.panelProfiles.Size = new System.Drawing.Size(235, 41);
             this.panelProfiles.TabIndex = 16;
@@ -277,43 +281,121 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Controls.Add(this.flowLayoutPanelMain);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(905, 468);
+            this.tabPage3.Size = new System.Drawing.Size(567, 201);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // flowLayoutPanelMain
             // 
-            this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 462);
-            this.panel1.TabIndex = 0;
+            this.flowLayoutPanelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanelMain.AutoScroll = true;
+            this.flowLayoutPanelMain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelMain.Controls.Add(this.labelWanted);
+            this.flowLayoutPanelMain.Controls.Add(this.flowWanted);
+            this.flowLayoutPanelMain.Controls.Add(this.label1);
+            this.flowLayoutPanelMain.Controls.Add(this.flowUnrated);
+            this.flowLayoutPanelMain.Controls.Add(this.label2);
+            this.flowLayoutPanelMain.Controls.Add(this.flowUnWanted);
+            this.flowLayoutPanelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelMain.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelMain.Name = "flowLayoutPanelMain";
+            this.flowLayoutPanelMain.Size = new System.Drawing.Size(558, 192);
+            this.flowLayoutPanelMain.TabIndex = 0;
+            this.flowLayoutPanelMain.WrapContents = false;
             // 
-            // splitContainer1
+            // flowWanted
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.flowWanted.AutoSize = true;
+            this.flowWanted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowWanted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.flowWanted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowWanted.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowWanted.Location = new System.Drawing.Point(3, 22);
+            this.flowWanted.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowWanted.Name = "flowWanted";
+            this.flowWanted.Size = new System.Drawing.Size(100, 50);
+            this.flowWanted.TabIndex = 0;
+            this.flowWanted.WrapContents = false;
             // 
-            // splitContainer1.Panel2
+            // labelWanted
             // 
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(899, 462);
-            this.splitContainer1.SplitterDistance = 220;
-            this.splitContainer1.TabIndex = 0;
+            this.labelWanted.AutoSize = true;
+            this.labelWanted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.labelWanted.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWanted.Location = new System.Drawing.Point(3, 0);
+            this.labelWanted.MinimumSize = new System.Drawing.Size(400, 0);
+            this.labelWanted.Name = "labelWanted";
+            this.labelWanted.Size = new System.Drawing.Size(400, 19);
+            this.labelWanted.TabIndex = 1;
+            this.labelWanted.Text = "Wanted";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 75);
+            this.label1.MinimumSize = new System.Drawing.Size(400, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(400, 21);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Unrated";
+            // 
+            // flowUnrated
+            // 
+            this.flowUnrated.AutoSize = true;
+            this.flowUnrated.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowUnrated.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.flowUnrated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowUnrated.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowUnrated.Location = new System.Drawing.Point(3, 99);
+            this.flowUnrated.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowUnrated.Name = "flowUnrated";
+            this.flowUnrated.Size = new System.Drawing.Size(100, 50);
+            this.flowUnrated.TabIndex = 1;
+            this.flowUnrated.WrapContents = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 152);
+            this.label2.MinimumSize = new System.Drawing.Size(400, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(400, 21);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "UnWanted";
+            // 
+            // flowUnWanted
+            // 
+            this.flowUnWanted.AutoSize = true;
+            this.flowUnWanted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowUnWanted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.flowUnWanted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowUnWanted.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowUnWanted.Location = new System.Drawing.Point(3, 176);
+            this.flowUnWanted.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowUnWanted.Name = "flowUnWanted";
+            this.flowUnWanted.Size = new System.Drawing.Size(100, 50);
+            this.flowUnWanted.TabIndex = 2;
+            this.flowUnWanted.WrapContents = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 569);
+            this.ClientSize = new System.Drawing.Size(601, 302);
             this.Controls.Add(this.panelProfiles);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.tabControl1);
@@ -331,9 +413,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.listViewEps)).EndInit();
             this.popupMenu.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.flowLayoutPanelMain.ResumeLayout(false);
+            this.flowLayoutPanelMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -359,8 +440,13 @@
         private System.Windows.Forms.ContextMenuStrip popupMenu;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelMain;
+        private System.Windows.Forms.Label labelWanted;
+        private System.Windows.Forms.FlowLayoutPanel flowWanted;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flowUnrated;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel flowUnWanted;
     }
 }
 
