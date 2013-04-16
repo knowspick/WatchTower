@@ -45,13 +45,12 @@ namespace WatchTower
                 DSeries.epsisodes.Add(eps);
             }
 
+
             //now display the items atlast
             foreach (DisplaySeries ds in DList)
             {
-                Panel Dpanel = new Panel();
-                Dpanel.Tag = ds;
-                Dpanel.Controls.Add(new Label() { Text = ds.series.Name });
-
+                Panel tp = new Panel();
+                tp.cl
                 flow.Controls.Add(Dpanel);
             }
         }
@@ -113,7 +112,7 @@ namespace WatchTower
                 UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
             }
 
-            //display the 3 list
+            //display the 3 list                        
             DisplayListInFlowLayout(WantedEps, flowWanted);
             DisplayListInFlowLayout(UnratedEps, flowUnrated);
             DisplayListInFlowLayout(UnWantedEps, flowUnWanted);

@@ -1,0 +1,3492 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>octalforty.Wizardby.Core</name>
+    </assembly>
+    <members>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.AstBuilder">
+            <summary>
+            Builds an Abstract Syntax Tree which reflects a <see cref="T:octalforty.Wizardby.Core.SemanticModel.Schema"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstBuilder.BuildAst(octalforty.Wizardby.Core.SemanticModel.Schema,octalforty.Wizardby.Core.Compiler.Ast.IAstNode)">
+            <summary>
+            Builds an AST tree for <paramref name="schema"/> and uses <paramref name="parent"/>
+            as a parent for the AST.
+            </summary>
+            <param name="schema"></param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddSchemaNode">
+            <summary>
+            Represents an <c>add schema</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ISchemaNode">
+            <summary>
+            Represents a basic schema node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ISchemaElementNode">
+            <summary>
+            Represents a basic schema element node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode">
+            <summary>
+            Represents a single node of an Abstract Syntax Tree.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNode.Location">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> of this node
+            in a source file.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNode.Parent">
+            <summary>
+            Gets or sets a reference to the parent <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode"/> of this node or <c>null</c> this
+            is a top-level node or no parent exist.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNode.Properties">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/> objects, which
+            represent properties of the current AST node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinition">
+            <summary>
+            Represents a database schema element.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinition.Name">
+            <summary>
+            Gets or sets a string which contains the name of the current schema element.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IIncludeTemplateNode">
+            <summary>
+            Represents an <c>include-template</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IIncludeTemplateNode.Name">
+            <summary>
+            Gets the name of the template to include.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode">
+            <summary>
+            Provides an abstract base class implementing <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode.#ctor(octalforty.Wizardby.Core.Compiler.Ast.IAstNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode"/> class.
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode.Location">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> of this node
+            in a source file.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode.Parent">
+            <summary>
+            Gets a reference to the parent <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode"/> of this node or <c>null</c> this
+            is a top-level node or no parent exist.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNode.Properties">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/> objects, which
+            represent properties of the current AST node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode">
+            <summary>
+            Represents an <c>add constraint</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IConstraintNode">
+            <summary>
+            Represents a basic constraint node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition">
+            <summary>
+            Represents a constraint.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of constraint.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition.Columns">
+            <summary>
+            Gets a reference to the collection of column names for the constraint.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddConstraintNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddConstraintNode.Name">
+            <summary>
+            Gets or sets a string which contains the name of the current schema element.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddConstraintNode.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of constraint.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddConstraintNode.Columns">
+            <summary>
+            Gets a reference to the collection of column names for the constraint.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstUtil.BuildAstNodeFromSchema(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            Builds up an AST with <paramref name="rootNode"/> as a root node 
+            from the provided <paramref name="schema"/>.
+            </summary>
+            <param name="rootNode"></param>
+            <param name="schema"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstUtil.CopyProperties(octalforty.Wizardby.Core.SemanticModel.IColumnDefinition,octalforty.Wizardby.Core.Compiler.Ast.IColumnNode)">
+            <summary>
+            Copies all properties from <paramref name="columnDefinition"/> to appropriate <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/>
+            objects and adds them to <paramref name="columnNode"/>.
+            </summary>
+            <param name="columnDefinition"></param>
+            <param name="columnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstUtil.CopyProperties(octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition,octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            
+            </summary>
+            <param name="reference"></param>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstUtil.Clone(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Clones the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.AstVisitorBase">
+            <summary>
+            Provides an abstract base class for AST visitors.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor">
+            <summary>
+            Defines a contract for an AST Visitor.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IMigrationNode)">
+            <summary>
+            Visits the given <paramref name="migrationNode"/>.
+            </summary>
+            <param name="migrationNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IBaselineNode)">
+            <summary>
+            Visits the given <paramref name="baselineNode"/>.
+            </summary>
+            <param name="baselineNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDeploymentNode)">
+            <summary>
+            Visits the given <paramref name="deploymentNode"/>.
+            </summary>
+            <param name="deploymentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultsNode)">
+            <summary>
+            Visits the given <paramref name="defaultsNode"/>.
+            </summary>
+            <param name="defaultsNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode)">
+            <summary>
+            Visits the given <paramref name="defaultPrimaryKeyNode"/>.
+            </summary>
+            <param name="defaultPrimaryKeyNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasesNode)">
+            <summary>
+            Visits the given <paramref name="typeAliasesNode"/>.
+            </summary>
+            <param name="typeAliasesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode)">
+            <summary>
+            Visits the given <paramref name="typeAliasNode"/>.
+            </summary>
+            <param name="typeAliasNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode)">
+            <summary>
+            Visits the given <paramref name="removeTableNode"/>.
+            </summary>
+            <param name="removeTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode)">
+            <summary>
+            Visits the given <paramref name="alterTableNode"/>.
+            </summary>
+            <param name="alterTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterColumnNode)">
+            <summary>
+            Visits the given <paramref name="alterColumnNode"/>.
+            </summary>
+            <param name="alterColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IEnvironmentNode)">
+            <summary>
+            Visits the given <paramref name="environmentNode"/>.
+            </summary>
+            <param name="environmentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IUpgradeNode)">
+            <summary>
+            Visits the given <paramref name="upgradeNode"/>.
+            </summary>
+            <param name="upgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDowngradeNode)">
+            <summary>
+            Visits the given <paramref name="downgradeNode"/>.
+            </summary>
+            <param name="downgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveColumnNode)">
+            <summary>
+            Visits the given <paramref name="removeColumnNode"/>.
+            </summary>
+            <param name="removeColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITemplatesNode)">
+            <summary>
+            Visits the given <paramref name="templatesNode"/>.
+            </summary>
+            <param name="templatesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITableTemplateNode)">
+            <summary>
+            Visits the given <paramref name="tableTemplateNode"/>.
+            </summary>
+            <param name="tableTemplateNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRefactorNode)">
+            <summary>
+            Visits the given <paramref name="refactorNode"/>.
+            </summary>
+            <param name="refactorNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode)">
+            <summary>
+            Visits the given <paramref name="addConstraintNode"/>.
+            </summary>
+            <param name="addConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode)">
+            <summary>
+            Visits the given <paramref name="removeConstraintNode"/>.
+            </summary>
+            <param name="removeConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddSchemaNode)">
+            <summary>
+            Visits the given <paramref name="addSchemaNode"/>.
+            </summary>
+            <param name="addSchemaNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IIncludeTemplateNode)">
+            <summary>
+            Visits the given <paramref name="includeTemplateNode"/>.
+            </summary>
+            <param name="includeTemplateNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstVisitorBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.AstVisitorBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.AstVisitorBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.ExecuteNativeSqlNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IColumnNode">
+            <summary>
+            Represents a basic column node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition">
+            <summary>
+            Represents a column within a table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Table">
+            <summary>
+            Gets or sets a string which contains the name of the table this
+            column belongs to.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Type">
+            <summary>
+            Gets or sets a <see cref="T:System.Data.DbType"/> member which represents the type of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.PrimaryKey">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is a primary key column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Identity">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is identity column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Nullable">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is nullable or not.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Length">
+            <summary>
+            Gets or sets a value which contains the length of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Scale">
+            <summary>
+            Gets or sets a value which contains the scale of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition.Precision">
+            <summary>
+            Gets or sets a value which contains the precision of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.ColumnNodeBase.Table">
+            <summary>
+            Gets or sets a string which contains the name of the table this
+            column belongs to.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode">
+            <summary>
+            Represents an <c>add column</c> construct or an implicit add column statement.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode">
+            <summary>
+            Represent an <c>add index</c> construct or an implicit add index statement.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition">
+            <summary>
+            Represents an index.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition.Columns">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IIndexColumnDefinition"/> objects
+            which represent the columns within this index.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of index.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition.Unique">
+            <summary>
+            Gets or sets a flag which indicates whether the current index or unique or not.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition.Clustered">
+            <summary>
+            Gets or sets a flag which indicates whether the current index or clustered or not.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode">
+            <summary>
+            Represents an <c>add reference</c> construct or an implicit add reference statement.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition">
+            <summary>
+            Represents a foreign key reference.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.PkColumns">
+            <summary>
+            Gets a reference to the collection of strings which represent names of
+            primary key columns.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.FkColumns">
+            <summary>
+            Gets a reference to the collection of strings which represent names of
+            foreign key columns.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.PkTable">
+            <summary>
+            Gets or sets a string which contains the name of the primary key table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.PkTableSchema">
+            <summary>
+            Gets or sets a string which contains the name of the primary key table schema.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.FkTable">
+            <summary>
+            Gets or sets a string which contains the name of the foreign key table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition.FkTableSchema">
+            <summary>
+            Gets or sets a string which contains the name of the foreign key table schema.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode">
+            <summary>
+            Represents an <c>add table</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ITableNode">
+            <summary>
+            Represents a basic table node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAlterColumnNode">
+            <summary>
+            Represents an <c>alter column</c> node.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode">
+            <summary>
+            Represents an <c>alter table</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty">
+            <summary>
+            Represents a property of an AST node.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty.Name">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains the name of the current property.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty.Value">
+            <summary>
+            Gets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyValue"/> 
+            which contains the value of the current property.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty.Location">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> of this property
+            in a source file.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyCollection">
+            <summary>
+            Represents an indexable collection of <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/> objects.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyCollection.AddProperty(octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty)">
+            <summary>
+            Adds a given <paramref name="property"/> to the current collection.
+            </summary>
+            <param name="property"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyCollection.Item(System.String)">
+            <summary>
+            Gets an <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/> object with a given name or <c>null</c> if
+            no property with the given name is defined.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyCollection.Count">
+            <summary>
+            Gets an value which contains the number of properties in the current collection.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IBaselineNode">
+            <summary>
+            Represents a <c>baseline</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode">
+            <summary>
+            Represents a <c>default-primary-key</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode.Name">
+            <summary>
+            Gets a string which contains the name of the default primary key.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IDefaultsNode">
+            <summary>
+            Represents a <c>defaults</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IDeploymentNode">
+            <summary>
+            Represents a <c>deployment</c> construct.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IEnvironmentNode">
+            <summary>
+            Represents an <c>environment</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IEnvironmentNode.Name">
+            <summary>
+            Gets a string which contains the name of the environment.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IMigrationNode">
+            <summary>
+            Represents a <c>migration</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IMigrationNode.Name">
+            <summary>
+            Gets a string with the name of the current migration.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddColumnNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddIndexNode.#ctor(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddIndexNode"/> class.
+            </summary>
+            <param name="parent"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddIndexNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddReferenceNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddTableNode.#ctor(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddTableNode"/> class.
+            </summary>
+            <param name="parent"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AddTableNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty">
+            <summary>
+            Represents an AST Node Property.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty.#ctor(System.String,octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyValue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty.#ctor(System.String,octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyValue,octalforty.Wizardby.Core.Compiler.Location)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="location"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty.Name">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains the name of the current property.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty.Value">
+            <summary>
+            Gets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodePropertyValue"/> 
+            which contains the value of the current property.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodeProperty.Location">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> of this property
+            in a source file.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection">
+            <summary>
+            Represents an AST Node Property Collection.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.AddProperty(octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty)">
+            <summary>
+            Adds a given <paramref name="property"/> to the current collection.
+            </summary>
+            <param name="property"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.System#Collections#Generic#IEnumerable{octalforty#Wizardby#Core#Compiler#Ast#IAstNodeProperty}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"></see> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.Item(System.String)">
+            <summary>
+            Gets an <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNodeProperty"/> object with a given name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.AstNodePropertyCollection.Count">
+            <summary>
+            Gets an value which contains the number of properties in the current collection.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.BaselineNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.DefaultPrimaryKeyNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.DefaultPrimaryKeyNode.Name">
+            <summary>
+            Gets a string which contains the name of the default primary key.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.DefaultsNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.DeploymentNode.#ctor(octalforty.Wizardby.Core.Compiler.Ast.IAstNode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.Impl.DeploymentNode"/> class.
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.DeploymentNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.DowngradeNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.MigrationNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.MigrationNode.Name">
+            <summary>
+            Gets a string with the name of the current migration.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IRefactorNode">
+            <summary>
+            Represents a <c>refactor</c> node.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IRefactorNode.Name">
+            <summary>
+            Gets or sets a string which contains the name of the refactoring.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RefactorNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.RefactorNode.Name">
+            <summary>
+            Gets or sets a string which contains the name of the refactoring.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveColumnNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode">
+            <summary>
+            Represents a <c>remove constraint</c> node.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of constraint.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveConstraintNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveConstraintNode.Name">
+            <summary>
+            Gets or sets a string which contains the name of the current schema element.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveConstraintNode.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of constraint.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode">
+            <summary>
+            Represents a <c>remove index</c> construct.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveIndexNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode">
+            <summary>
+            Represents a <c>remove reference</c> construct.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveReferenceNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode">
+            <summary>
+            Represents a <c>remove table</c> construct
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveTableNode.#ctor(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="parent"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.RemoveTableNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ITableTemplateNode">
+            <summary>
+            Represents a <c>table template</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.ITableTemplateNode.Name">
+            <summary>
+            Gets a string which contains the name of this table template.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.TableTemplateNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.TableTemplateNode.Name">
+            <summary>
+            Gets a string which contains the name of this table template.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ITemplatesNode">
+            <summary>
+            Represents a <c>templates</c> construct.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.TemplatesNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasesNode">
+            <summary>
+            Represents a <c>type-aliases</c> construct.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.TypeAliasesNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode">
+            <summary>
+            Represents a <c>type-alias</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode.Name">
+            <summary>
+            Gets a string which contains the name of this type alias.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.TypeAliasNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.TypeAliasNode.Name">
+            <summary>
+            Gets a string which contains the name of this type alias.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.UpgradeNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Ast.IVersionNode">
+            <summary>
+            Represents a <c>version</c> construct.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.IVersionNode.Number">
+            <summary>
+            Gets the number of the current version.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Ast.Impl.VersionNode.Accept(octalforty.Wizardby.Core.Compiler.Ast.IAstVisitor)">
+            <summary>
+            Accepts a given <paramref name="visitor"/>.
+            </summary>
+            <param name="visitor"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Ast.Impl.VersionNode.Number">
+            <summary>
+            Gets the number of the current version.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.AddCompilerStage(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> to the compiler pipeline.
+            </summary>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.AddCompilerStageBefore``1(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> before stage <typeparamref name="T"/> to the compiler pipeline.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.AddCompilerStageAfter``1(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> after stage <typeparamref name="T"/> to the compiler pipeline.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.RemoveCompilerStage``1">
+            <summary>
+            Removes a compiler stage of type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.Compile(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,octalforty.Wizardby.Core.Compiler.MdlCompilationOptions)">
+            <summary>
+            
+            </summary>
+            <param name="astNode"></param>
+            <param name="compilationOptions"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompiler.Compile(System.IO.TextReader,octalforty.Wizardby.Core.Compiler.MdlCompilationOptions)">
+            <summary>
+            Performs compilation of the given source from the <paramref name="textReader"/>.
+            </summary>
+            <param name="textReader"></param>
+            <param name="compilationOptions"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.IMdlCompilerStage">
+            <summary>
+            Represents a single stage of the MDL compiler pipeline.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlCompilerStage.SetEnvironment(octalforty.Wizardby.Core.Compiler.Environment)">
+            <summary>
+            Sets <paramref name="environment"/> for the current compilation session.
+            </summary>
+            <param name="environment"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlParser.Parse">
+            <summary>
+            Parses tokens and returns an <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode"/> which represents the root node of the AST.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlScanner.RegisterKeyword(System.String)">
+            <summary>
+            Registers a keyword <paramref name="keyword"/> within the scanner.
+            </summary>
+            <param name="keyword"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.IMdlScanner.Scan">
+            <summary>
+            Scans the input stream and returns scanned <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> objects.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase">
+            <summary>
+            Provides a base class for MDL compiler stages.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IMigrationNode)">
+            <summary>
+            Visits the given <paramref name="migrationNode"/>.
+            </summary>
+            <param name="migrationNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IBaselineNode)">
+            <summary>
+            Visits the given <paramref name="baselineNode"/>.
+            </summary>
+            <param name="baselineNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDeploymentNode)">
+            <summary>
+            Visits the given <paramref name="deploymentNode"/>.
+            </summary>
+            <param name="deploymentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultsNode)">
+            <summary>
+            Visits the given <paramref name="defaultsNode"/>.
+            </summary>
+            <param name="defaultsNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode)">
+            <summary>
+            Visits the given <paramref name="defaultPrimaryKeyNode"/>.
+            </summary>
+            <param name="defaultPrimaryKeyNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasesNode)">
+            <summary>
+            Visits the given <paramref name="typeAliasesNode"/>.
+            </summary>
+            <param name="typeAliasesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode)">
+            <summary>
+            Visits the given <paramref name="typeAliasNode"/>.
+            </summary>
+            <param name="typeAliasNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode)">
+            <summary>
+            Visits the given <paramref name="removeTableNode"/>.
+            </summary>
+            <param name="removeTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode)">
+            <summary>
+            Visits the given <paramref name="alterTableNode"/>.
+            </summary>
+            <param name="alterTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterColumnNode)">
+            <summary>
+            Visits the given <paramref name="alterColumnNode"/>.
+            </summary>
+            <param name="alterColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IEnvironmentNode)">
+            <summary>
+            Visits the given <paramref name="environmentNode"/>.
+            </summary>
+            <param name="environmentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IUpgradeNode)">
+            <summary>
+            Visits the given <paramref name="upgradeNode"/>.
+            </summary>
+            <param name="upgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDowngradeNode)">
+            <summary>
+            Visits the given <paramref name="downgradeNode"/>.
+            </summary>
+            <param name="downgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveColumnNode)">
+            <summary>
+            Visits the given <paramref name="removeColumnNode"/>.
+            </summary>
+            <param name="removeColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITemplatesNode)">
+            <summary>
+             Visits the given <paramref name="templatesNode" />.
+            </summary>
+            <param name="templatesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITableTemplateNode)">
+            <summary>
+             Visits the given <paramref name="tableTemplateNode" />.
+            </summary>
+            <param name="tableTemplateNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode)">
+            <summary>
+            Visits the given <paramref name="addConstraintNode"/>.
+            </summary>
+            <param name="addConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode)">
+            <summary>
+            Visits the given <paramref name="removeConstraintNode"/>.
+            </summary>
+            <param name="removeConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.SetEnvironment(octalforty.Wizardby.Core.Compiler.Environment)">
+            <summary>
+            Sets <paramref name="environment"/> for the current compilation session.
+            </summary>
+            <param name="environment"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.MdlCompilerStageBase.Environment">
+            <summary>
+            Gets a reference to the <see cref="T:octalforty.Wizardby.Core.Compiler.Environment"/> object for the current
+            compilation session.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode)">
+            <summary>
+            Visits the given <paramref name="addConstraintNode"/>.
+            </summary>
+            <param name="addConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.AstFlattenerCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode)">
+            <summary>
+            Visits the given <paramref name="removeConstraintNode"/>.
+            </summary>
+            <param name="removeConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITemplatesNode)">
+            <summary>
+             Visits the given <paramref name="templatesNode" />.
+            </summary>
+            <param name="templatesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode)">
+            <summary>
+            Visits the given <paramref name="removeTableNode"/>.
+            </summary>
+            <param name="removeTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode)">
+            <summary>
+            Visits the given <paramref name="alterTableNode"/>.
+            </summary>
+            <param name="alterTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode)">
+            <summary>
+            Visits the given <paramref name="addConstraintNode"/>.
+            </summary>
+            <param name="addConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveConstraintNode)">
+            <summary>
+            Visits the given <paramref name="removeConstraintNode"/>.
+            </summary>
+            <param name="removeConstraintNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.BindingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.ConventionResolutionCompilerStage">
+            <summary>
+            Performs resolution of conventions in an AST.
+            </summary>
+            <remarks>
+            This stage resolves all conventions and expands the AST appropriately. For instance, this piece:
+            <code>
+            add table Bar ... :
+                add column Foo ... :
+                    index
+            </code>
+            will get expanded to
+            <code>
+            add table Bar ... :
+                add column Foo ... :
+                    index table => Bar, column => Foo
+            </code>
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.ConventionResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.SetEnvironment(octalforty.Wizardby.Core.Compiler.Environment)">
+            <summary>
+            Sets <paramref name="environment"/> for the current compilation session.
+            </summary>
+            <param name="environment"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IBaselineNode)">
+            <summary>
+            Visits the given <paramref name="baselineNode"/>.
+            </summary>
+            <param name="baselineNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDowngradeNode)">
+            <summary>
+            Visits the given <paramref name="downgradeNode"/>.
+            </summary>
+            <param name="downgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode)">
+            <summary>
+            Visits the given <paramref name="removeTableNode"/>.
+            </summary>
+            <param name="removeTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode)">
+            <summary>
+            Visits the given <paramref name="alterTableNode"/>.
+            </summary>
+            <param name="alterTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.DowngradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IUpgradeNode)">
+            <summary>
+             Visits the given <paramref name="upgradeNode" />.
+            </summary>
+            <param name="upgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDowngradeNode)">
+            <summary>
+             Visits the given <paramref name="downgradeNode" />.
+            </summary>
+            <param name="downgradeNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IMigrationNode)">
+            <summary>
+            Visits the given <paramref name="migrationNode"/>.
+            </summary>
+            <param name="migrationNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IBaselineNode)">
+            <summary>
+            Visits the given <paramref name="baselineNode"/>.
+            </summary>
+            <param name="baselineNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+             Visits the given <paramref name="addIndexNode" />.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+             Visits the given <paramref name="addReferenceNode" />.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultsNode)">
+            <summary>
+             Visits the given <paramref name="defaultsNode" />.
+            </summary>
+            <param name="defaultsNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDeploymentNode)">
+            <summary>
+             Visits the given <paramref name="deploymentNode" />.
+            </summary>
+            <param name="deploymentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode)">
+            <summary>
+             Visits the given <paramref name="defaultPrimaryKeyNode" />.
+            </summary>
+            <param name="defaultPrimaryKeyNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasesNode)">
+            <summary>
+             Visits the given <paramref name="typeAliasesNode" />.
+            </summary>
+            <param name="typeAliasesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode)">
+            <summary>
+             Visits the given <paramref name="typeAliasNode" />.
+            </summary>
+            <param name="typeAliasNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+             Visits the given <paramref name="removeReferenceNode" />.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+             Visits the given <paramref name="removeIndexNode" />.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterTableNode)">
+            <summary>
+             Visits the given <paramref name="alterTableNode" />.
+            </summary>
+            <param name="alterTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAlterColumnNode)">
+            <summary>
+             Visits the given <paramref name="alterColumnNode" />.
+            </summary>
+            <param name="alterColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IEnvironmentNode)">
+            <summary>
+             Visits the given <paramref name="environmentNode" />.
+            </summary>
+            <param name="environmentNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.MdlGeneratorAstVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveColumnNode)">
+            <summary>
+             Visits the given <paramref name="removeColumnNode" />.
+            </summary>
+            <param name="removeColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.NamingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.NamingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.NamingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddConstraintNode)">
+            <summary>
+            Visits the given <paramref name="addConstraintNode"/>.
+            </summary>
+            <param name="addConstraintNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.PrimaryKeyResolutionCompilerStage">
+            <summary>
+            A MDL Compiler Stage which inserts primary key definitions to <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode"/> nodes
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.PrimaryKeyResolutionCompilerStage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Impl.PrimaryKeyResolutionCompilerStage"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.PrimaryKeyResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode)">
+            <summary>
+            Visits the given <paramref name="defaultPrimaryKeyNode"/>.
+            </summary>
+            <param name="defaultPrimaryKeyNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.PrimaryKeyResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.SchemaBuilderCompilerStageBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.SchemaInfoBuilderCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.ShortcutResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITemplatesNode)">
+            <summary>
+             Visits the given <paramref name="templatesNode" />.
+            </summary>
+            <param name="templatesNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.ShortcutResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.TemplateSubstitutionCompilerStage">
+            <summary>
+            Injects templates into appropriate "add table" nodes.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TemplateSubstitutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITableTemplateNode)">
+            <summary>
+             Visits the given <paramref name="tableTemplateNode" />.
+            </summary>
+            <param name="tableTemplateNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TemplateSubstitutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+            Visits the given <paramref name="addTableNode"/>.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage">
+            <summary>
+            Resolves type aliases by substituting type specifications from <c>type-alias</c> nodes to
+            appropriate <c>add column</c> nodes.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.ITypeAliasNode)">
+            <summary>
+            Visits the given <paramref name="typeAliasNode"/>.
+            </summary>
+            <param name="typeAliasNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IDefaultPrimaryKeyNode)">
+            <summary>
+            Visits the given <paramref name="defaultPrimaryKeyNode"/>.
+            </summary>
+            <param name="defaultPrimaryKeyNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeAliasResolutionCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.TypeInferenceCompilerStage">
+            <summary>
+            A MDL Compiler Stage which inferes column types where no types specified.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeInferenceCompilerStage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Impl.TypeInferenceCompilerStage"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.TypeInferenceCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+            Visits the given <paramref name="addColumnNode"/>.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Impl.TypeShortcutExpanderCompilerStage">
+            <summary>
+            Expands type shortcuts to normal type specifications.
+            </summary>
+            <remarks>
+            This stage expands short forms of type definitions like <c>"int32!"</c>, <c>string?(200)</c> or
+            <c>decimal?(18,3)</c> to their full counterparts.
+            <para/>
+            This applies only to <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode"/> and <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAlterColumnNode"/>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Impl.UpgradeGenerationStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IVersionNode)">
+            <summary>
+            Visits the given <paramref name="versionNode"/>.
+            </summary>
+            <param name="versionNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Location">
+            <summary>
+            Represents a location within a source file.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Location.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> class.
+            </summary>
+            <param name="line"></param>
+            <param name="column"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Location.Equals(octalforty.Wizardby.Core.Compiler.Location)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>
+            true if the current object is equal to the other parameter; otherwise, false.
+            </returns>
+            <param name="location">An object to compare with this object.</param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Location.Line">
+            <summary>
+            Gets a value which contains a zero-based line number.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Location.Column">
+            <summary>
+            Gets a value which contains a zero-based column number.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.MdlCompiler">
+            <summary>
+            Compiles MDL AST and generates code using supplied code generator.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.#ctor(octalforty.Wizardby.Core.Compiler.ICodeGenerator,octalforty.Wizardby.Core.Compiler.Environment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.MdlCompiler"/> class.
+            </summary>
+            <param name="codeGenerator"></param>
+            <param name="environment"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.AddCompilerStage(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> to the compiler pipeline.
+            </summary>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.AddCompilerStageBefore``1(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> before stage <typeparamref name="T"/> to the compiler pipeline.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.AddCompilerStageAfter``1(octalforty.Wizardby.Core.Compiler.IMdlCompilerStage)">
+            <summary>
+            Adds a given <paramref name="compilerStage"/> after stage <typeparamref name="T"/> to the compiler pipeline.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="compilerStage"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.RemoveCompilerStage``1">
+            <summary>
+            Removes a compiler stage of type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.Compile(octalforty.Wizardby.Core.Compiler.Ast.IAstNode,octalforty.Wizardby.Core.Compiler.MdlCompilationOptions)">
+            <summary>
+            
+            </summary>
+            <param name="astNode"></param>
+            <param name="compilationOptions"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlCompiler.Compile(System.IO.TextReader,octalforty.Wizardby.Core.Compiler.MdlCompilationOptions)">
+            <summary>
+            Performs compilation of the given source from the <paramref name="textReader"/>.
+            </summary>
+            <param name="textReader"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.MdlGenerator">
+            <summary>
+            Performs generation of MDL files based on Abstract Syntax Tree.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.MdlParser">
+            <summary>
+            Performs syntax analysis of MDL.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlParser.#ctor(octalforty.Wizardby.Core.Compiler.IMdlScanner)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.MdlParser"/> class.
+            </summary>
+            <param name="scanner"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlParser.Parse">
+            <summary>
+            Parses tokens and returns an <see cref="T:octalforty.Wizardby.Core.Compiler.Ast.IAstNode"/> which represents the root node of the AST.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.MdlScanner">
+            <summary>
+            Performs lexical analysis of MDL source files.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlScanner.#ctor(octalforty.Wizardby.Core.Compiler.SourceReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.MdlScanner"/> class.
+            </summary>
+            <param name="sourceReader"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlScanner.RegisterKeyword(System.String)">
+            <summary>
+            Registers a keyword <paramref name="keyword"/> within the scanner.
+            </summary>
+            <param name="keyword"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.MdlScanner.Scan">
+            <summary>
+            Scans the input stream and returns scanned <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> objects.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SchemaDefinitionBuilderVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddTableNode)">
+            <summary>
+             Visits the given <paramref name="addTableNode" />.
+            </summary>
+            <param name="addTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SchemaDefinitionBuilderVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddColumnNode)">
+            <summary>
+             Visits the given <paramref name="addColumnNode" />.
+            </summary>
+            <param name="addColumnNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SchemaDefinitionBuilderVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+             Visits the given <paramref name="addIndexNode" />.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SchemaDefinitionBuilderVisitor.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+             Visits the given <paramref name="addReferenceNode" />.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.SourceReader">
+            <summary>
+            Provides character-based access to a given <see cref="T:System.IO.TextReader"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SourceReader.#ctor(System.IO.TextReader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.SourceReader"/> class.
+            </summary>
+            <param name="textReader"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.SourceReader.ReadNext">
+            <summary>
+            Reads and returns the next character from the input stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.SourceReader.Line">
+            <summary>
+            Gets a value which contains a zero-based number of the current line.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.SourceReader.Column">
+            <summary>
+            Gets a value which contains a zero-based number of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.SourceReader.Empty">
+            <summary>
+            Gets a value which indicates whether this <see cref="T:octalforty.Wizardby.Core.Compiler.SourceReader"/> is empty.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.SourceReader.Next">
+            <summary>
+            Gets a <see cref="T:System.Char"/> with the next value.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.Token">
+            <summary>
+            Represents a single token.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Token.#ctor(octalforty.Wizardby.Core.Compiler.TokenType,System.String,octalforty.Wizardby.Core.Compiler.Location)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> class.
+            </summary>
+            <param name="type"></param>
+            <param name="lexeme"></param>
+            <param name="location"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Token.#ctor(octalforty.Wizardby.Core.Compiler.TokenType,octalforty.Wizardby.Core.Compiler.Location)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> class.
+            </summary>
+            <param name="type"></param>
+            <param name="location"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.Token.Equals(octalforty.Wizardby.Core.Compiler.Token)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <returns>
+            true if the current object is equal to the other parameter; otherwise, false.
+            </returns>
+            <param name="token">An object to compare with this object.</param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Token.Type">
+            <summary>
+            Gets a member of <see cref="T:octalforty.Wizardby.Core.Compiler.TokenType"/> enumeration, which represents the type
+            of the current token.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Token.Lexeme">
+            <summary>
+            Gets a string which contains the lexeme of the current token.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.Token.Location">
+            <summary>
+            Gets a <see cref="T:octalforty.Wizardby.Core.Compiler.Location"/> object which contains the location of the current token.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.TokenSequence">
+            <summary>
+            Represents a sequence of tokens.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.TokenSequence.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.TokenSequence"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.TokenSequence.#ctor(octalforty.Wizardby.Core.Compiler.TokenSequence)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Compiler.TokenSequence"/> class.
+            </summary>
+            <param name="tokens"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.TokenSequence.Add(octalforty.Wizardby.Core.Compiler.Token)">
+            <summary>
+            Adds a token <paramref name="token"/> to the current token sequence.
+            </summary>
+            <param name="token"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.TokenSequence.RemoveFirst">
+            <summary>
+            Removes and returns the first token of the current token sequence.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.TokenSequence.InsertFirst(octalforty.Wizardby.Core.Compiler.Token)">
+            <summary>
+            Inserts <paramref name="token"/> to the very beginning of the sequence.
+            </summary>
+            <param name="token"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.TokenSequence.Empty">
+            <summary>
+            Gets a value which indicates whether current token sequence is empty.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.TokenSequence.First">
+            <summary>
+            Gets a <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> object which represents the first token in the
+            current token sequence.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.TokenSequence.Last">
+            <summary>
+            Gets a <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> object which represents the last token in the
+            current token sequence.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Compiler.TokenSequence.Count">
+            <summary>
+            Gets a value which contains the number of tokens in the current token sequence.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.TokenType">
+            <summary>
+            Defines the type of a <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/>.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.IntegerConstant">
+            <summary>
+            Integer constant.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.StringConstant">
+            <summary>
+            AsString constant.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.Symbol">
+            <summary>
+            Symbol.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.Colon">
+            <summary>
+            Colon symbol "<c>:</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.PropertyAssignment">
+            <summary>
+            Property Assignment "<c>=></c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.LeftSquareBracket">
+            <summary>
+            Left Square Bracket "<c>[</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.RightSquareBracket">
+            <summary>
+            Right Square Bracket "<c>]</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.LeftBrace">
+            <summary>
+            Left Brace "<c>{</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.RightBrace">
+            <summary>
+            Right Brace "<c>}</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.Comma">
+            <summary>
+            Comma "<c>,</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.LeftBracket">
+            <summary>
+            Left Bracket "<c>(</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.RightBracket">
+            <summary>
+            Right Bracket "<c>)</c>".
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.Keyword">
+            <summary>
+            Keyword.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.BeginBlock">
+            <summary>
+            Beginning of the Block.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.EndBlock">
+            <summary>
+            End of the Block.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.EndStatement">
+            <summary>
+            End of the Statement.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Compiler.TokenType.Indent">
+            <summary>
+            Indent.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.XmdlGenerator">
+            <summary>
+            Performs generation of XMDL files based on Abstract Syntax Tree.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Compiler.XmdlScanner">
+            <summary>
+            Performs lexical analysis of XMDL source files.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.XmdlScanner.RegisterKeyword(System.String)">
+            <summary>
+            Registers a keyword <paramref name="keyword"/> within the scanner.
+            </summary>
+            <param name="keyword"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Compiler.XmdlScanner.Scan">
+            <summary>
+            Scans the input stream and returns scanned <see cref="T:octalforty.Wizardby.Core.Compiler.Token"/> objects.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbScriptGeneratorBase">
+            <summary>
+            Represents abase class for <see cref="T:octalforty.Wizardby.Core.Db.IDbScriptGenerator"/> implementors.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbScriptGenerator">
+            <summary>
+            Defines a contract for a code generator which generates SQL DDL script.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbPlatformDependency">
+            <summary>
+            Declares a dependency on the <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/>.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.IDbPlatformDependency.Platform">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbScriptGenerator.SetMigrationMode(octalforty.Wizardby.Core.Migration.MigrationMode)">
+            <summary>
+            Sets current <paramref name="migrationMode"/> for the given
+            code generation session.
+            </summary>
+            <param name="migrationMode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbScriptGenerator.SetNativeSqlResourceProvider(octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider)">
+            <summary>
+            Sets a reference to <see cref="T:octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider"/>, which is
+            used to retrieve Native SQL Resources for the given code generation session.
+            </summary>
+            <param name="nativeSqlResourceProvider"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbScriptGeneratorBase.#ctor(octalforty.Wizardby.Core.Db.IDbStatementBatchWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.DbScriptGeneratorBase"/> class.
+            </summary>
+            <param name="statementBatchWriter"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.AnsiDbScriptGeneratorBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IExecuteNativeSqlNode)">
+            <summary>
+            Visits the given <paramref name="executeNativeSqlNode"/>.
+            </summary>
+            <param name="executeNativeSqlNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.AnsiDbScriptGeneratorBase.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase">
+            <summary>
+            Provides an abstract base class for <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/> implementations.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder">
+            <summary>
+            Provides a contract for connection string builders, which encapsulate connection
+            string creation logic for a particular <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/>.
+            </summary>
+            <remarks>
+            Implementors of <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/> must support the following well-known keys:
+            <c>host</c>/<c>server</c>, <c>database</c>, <c>login</c>, <c>password</c>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder.AppendKeyValuePair(System.String,System.String)">
+            <summary>
+            Appends a <paramref name="key"/>-<paramref name="value"/> pair to the connection string.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder.ToString">
+            <summary>
+            Returns the connection string associated with this <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase"/> class.
+            </summary>
+            <param name="ignoreUnmappedKeys"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.RegisterKeyMapping(System.String,System.String)">
+            <summary>
+            Registers key mapping from <paramref name="key"/> to <paramref name="mappedKey"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="mappedKey"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.AppendKeyValuePair(System.String,System.String)">
+            <summary>
+            Appends a <paramref name="key"/>-<paramref name="value"/> pair to the connection string.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.ToString">
+            <summary>
+            Returns the connection string associated with this <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.ConnectionStringBuilder">
+            <summary>
+            Gets a reference to the <see cref="T:System.Text.StringBuilder"/> used to construct a connection string.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.DbConnectionStringBuilderBase.IgnoreUnmappedKeys">
+            <summary>
+            Gets or sets a flag which indicates whether to ignore unmapped keys while
+            building the connection string. 
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbDialect">
+            <summary>
+            Encapsulates SQL generation logic for a particular DBMS.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbOperation`1">
+            <summary>
+            Represents the method that will perform database operation within the <see cref="!:IDbExecutive"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbPlatformAttribute">
+            <summary>
+            Defines Database Platform metadata.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbPlatformAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.DbPlatformAttribute"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="alias"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.DbPlatformAttribute.Name">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains a human-readable name of the Database Platform.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.DbPlatformAttribute.Alias">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains an alias for the current Database Platform.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbPlatformBase`4">
+            <summary>
+            Provides base implementation of a <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> interface.
+            </summary>
+            <typeparam name="TDbConnectionStringBuilder"></typeparam>
+            <typeparam name="TDbDialect"></typeparam>
+            <typeparam name="TDbNamingStrategy"></typeparam>
+            <typeparam name="TDbTypeMapper"></typeparam>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbPlatform">
+            <summary>
+            Describes various aspects of a Database Platform.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Db.IDbPlatform.Capabilities">
+            <summary>
+            Gets a combination of <see cref="T:octalforty.Wizardby.Core.Db.DbPlatformCapabilities"/> flags, which define
+            the capabilities of the current <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbPlatformBase`4.#ctor(octalforty.Wizardby.Core.Db.DbPlatformCapabilities)">
+            <summary>
+            Initializes a new instance of the 
+            <see cref="T:octalforty.Wizardby.Core.Db.DbPlatformBase`4"/> class.
+            </summary>
+            <param name="capabilities"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbPlatformCapabilities">
+            <summary>
+            Defines capabilities of a particular <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/>.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Db.DbPlatformCapabilities.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Db.DbPlatformCapabilities.SupportsClusteredIndexes">
+            <summary>
+            The <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> supports clustered indexes.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Db.DbPlatformCapabilities.SupportsCompositePrimaryKeys">
+            <summary>
+            The <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> supports composite primary keys.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Db.DbPlatformCapabilities.SupportsTransactionalDdl">
+            <summary>
+            The <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> supports transactional DDL.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbSchemaProviderBase">
+            <summary>
+            Provides an abstract base class for <see cref="T:octalforty.Wizardby.Core.Db.IDbSchemaProvider"/> implementors.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbSchemaProvider">
+            <summary>
+            Provides means to introspect database schema.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbSchemaProvider.GetSchema(System.String)">
+            <summary>
+            Introspects the database defined by the <see cref="!:connectionString"/> and 
+            returns a <see cref="T:octalforty.Wizardby.Core.SemanticModel.Schema"/> object, which contains all the schema elements.
+            </summary>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.DbSchemaProviderBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.DbSchemaProviderBase"/> class.
+            </summary>
+            <param name="platform"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.GetSchema(System.String)">
+            <summary>
+            Introspects the database defined by the <see cref="!:connectionString"/> and 
+            returns a <see cref="T:octalforty.Wizardby.Core.SemanticModel.Schema"/> object, which contains all the schema elements.
+            </summary>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.GetReferenceDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            references in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.GetIndexDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            indexes in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.GetSchemaDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            schemas in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbSchemaProviderBase.GetTableDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            tables, their columns and primary keys in the database defined by the 
+            <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.DbTypeMapperBase">
+            <summary>
+            Provides base implementation of a <see cref="T:octalforty.Wizardby.Core.Db.IDbTypeMapper"/> interface.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbTypeMapper">
+            <summary>
+            Provides functionality for mapping between logical database types (<see cref="T:System.Data.DbType"/>) to native database types.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="logicalType"/> to an appropriate native type name.
+            </summary>
+            <param name="logicalType"></param>
+            <param name="length"></param>
+            <returns></returns>
+            <remarks>
+            The <see cref="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32})"/> implementation must take <paramref name="length"/> into account and produce
+            a valid type name. For example, a SQL Server Type Mapper when asked to map a <see cref="F:System.Data.DbType.String"/> of length
+            500 must return <c>nvarchar(500)</c>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="logicalType"/> to an appropriate native type name.
+            </summary>
+            <param name="logicalType"></param>
+            <param name="scale"></param>
+            <param name="precision"></param>
+            <returns></returns>
+            <remarks>
+            The <see cref="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32},System.Nullable{System.Int32})"/> implementation must take <paramref name="scale"/> and <paramref name="precision"/>
+            into account and produce a valid type name. For example, a SQL Server Type Mapper when asked to map a <see cref="F:System.Data.DbType.Decimal"/> of 
+            with scale 30 and precision 10 must return <c>decimal(30,10)</c>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToDbType(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="nativeType"/> to an appropriate <see cref="T:System.Data.DbType"/> value.
+            </summary>
+            <param name="nativeType"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbTypeMapperBase.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:octalforty.Wizardby.Core.Db.DbTypeMapperBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbTypeMapperBase.RegisterTypeMapping(System.Data.DbType,System.String)">
+            <summary>
+            Registers a type mapping from <paramref name="logicalType"/> to <paramref name="nativeType"/>.
+            </summary>
+            <param name="logicalType"></param>
+            <param name="nativeType"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbTypeMapperBase.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="logicalType"/> to an appropriate physical type name.
+            </summary>
+            <param name="logicalType"></param>
+            <param name="length"></param>
+            <returns></returns>
+            <remarks>
+            The <see cref="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32})"/> implementation must take <paramref name="length"/> into account and produce
+            a valid type name. For example, a SQL Server Type Mapper when asked to map a <see cref="F:System.Data.DbType.String"/> of length
+            500 must return <c>nvarchar(500)</c>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbTypeMapperBase.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="logicalType"/> to an appropriate native type name.
+            </summary>
+            <param name="logicalType"></param>
+            <param name="scale"></param>
+            <param name="precision"></param>
+            <returns></returns>
+            <remarks>
+            The <see cref="M:octalforty.Wizardby.Core.Db.IDbTypeMapper.MapToNativeType(System.Data.DbType,System.Nullable{System.Int32},System.Nullable{System.Int32})"/> implementation must take <paramref name="scale"/> and <paramref name="precision"/>
+            into account and produce a valid type name. For example, a SQL Server Type Mapper when asked to map a <see cref="F:System.Data.DbType.Decimal"/> of 
+            with scale 30 and precision 10 must return <c>decimal(30,10)</c>.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbTypeMapperBase.MapToDbType(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="nativeType"/> to an appropriate <see cref="T:System.Data.DbType"/> value.
+            </summary>
+            <param name="nativeType"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbUtil.ExecuteInTransaction``1(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,octalforty.Wizardby.Core.Db.DbAction{System.Data.IDbTransaction,``0})">
+            <summary>
+            Executes <paramref name="action"/> within the transaction for the <paramref name="dbPlatform"/> 
+            on the <paramref name="connectionString"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbPlatform"></param>
+            <param name="connectionString"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbUtil.ExecuteInTransaction(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,octalforty.Wizardby.Core.Db.DbTransactionAction)">
+            <summary>
+            Executes <paramref name="action"/> within the transaction for the <paramref name="dbPlatform"/> 
+            on the <paramref name="connectionString"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbPlatform"></param>
+            <param name="connectionString"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbUtil.Execute``1(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,octalforty.Wizardby.Core.Db.DbAction{System.Data.IDbConnection,``0})">
+            <summary>
+            Executes <paramref name="action"/> within the connection open for the <paramref name="dbPlatform"/>
+            on the <paramref name="connectionString"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbPlatform"></param>
+            <param name="connectionString"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.DbUtil.Execute(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,octalforty.Wizardby.Core.Db.DbConnectionAction)">
+            <summary>
+            Executes <paramref name="action"/> within the connection open for the <paramref name="dbPlatform"/>
+            on the <paramref name="connectionString"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dbPlatform"></param>
+            <param name="connectionString"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.IDbNamingStrategy">
+            <summary>
+            Encapsulates logic
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbSchemaProvider"/> which uses <c>INFORMATION_SCHEMA</c> view
+            to retrieve schema information.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider"/> class.
+            </summary>
+            <param name="platform"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.GetSchemaDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            schemas in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.GetTableDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            tables, their columns and primary keys in the database defined by the 
+            <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.GetReferenceDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            references in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Db.InformationSchemaSchemaProvider.GetIndexDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            indexes in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.IMigrationService">
+            <summary>
+            Provides core migration functionality.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationService.Migrate(System.String,System.Nullable{System.Int64},System.IO.TextReader)">
+            <summary>
+            Migrates the database identified by the <paramref name="connectionString"/> using
+            <paramref name="migrationDefinition"/> to version <paramref name="targetVersion"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="targetVersion">Required version of the database schema</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationService.Rollback(System.String,System.Int32,System.IO.TextReader)">
+            <summary>
+            Rolls back <paramref name="step"/> last versions of the the database identified by the 
+            <paramref name="connectionString"/> using <paramref name="migrationDefinition"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="step">Number of versions to roll back</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationService.Redo(System.String,System.Int32,System.IO.TextReader)">
+            <summary>
+            Redoes <paramref name="step"/> last versions of the the database identified by the
+            <paramref name="connectionString"/> using <paramref name="migrationDefinition"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="step">Number of versions to reapply</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="E:octalforty.Wizardby.Core.Migration.IMigrationService.Migrating">
+            <summary>
+            Occurs when starting migrating to a version <see cref="P:octalforty.Wizardby.Core.Migration.MigrationEventArgs.Version"/>.
+            </summary>
+        </member>
+        <member name="E:octalforty.Wizardby.Core.Migration.IMigrationService.Migrated">
+            <summary>
+            Occurs when successfully completed migrating to a version <see cref="P:octalforty.Wizardby.Core.Migration.MigrationEventArgs.Version"/>.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager">
+            <summary>
+            Provides functionality for managing information about currently registered migration versions
+            and for registering versioning information.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager.GetRegisteredMigrationVersions(System.Data.IDbTransaction)">
+            <summary>
+            Returns a collection of all registered versions for the given <paramref name="dbTransaction"/> or
+            empty collection if no migration versions were registered.
+            </summary>
+            <param name="dbTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager.GetCurrentMigrationVersion(System.Data.IDbTransaction)">
+            <summary>
+            Returns a value which contains the maximum migration version for the given <paramref name="dbTransaction"/>
+            or <c>0</c> if no versioning information is present.
+            </summary>
+            <param name="dbTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager.RegisterMigrationVersion(System.Data.IDbTransaction,octalforty.Wizardby.Core.Migration.MigrationMode,System.Int64)">
+            <summary>
+            Registers the fact of migrating to version <paramref name="version"/> with mode <paramref name="migrationMode"/>
+            for the given <paramref name="dbTransaction"/>.
+            </summary>
+            <param name="dbTransaction"></param>
+            <param name="migrationMode"></param>
+            <param name="version"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager">
+            <summary>
+            Implementation of the <see cref="T:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager"/> which uses a table to track
+            version information.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform,octalforty.Wizardby.Core.Migration.Impl.IDbCommandExecutionStrategy,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager"/> class.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="dbCommandExecutionStrategy"></param>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager.GetRegisteredMigrationVersions(System.Data.IDbTransaction)">
+            <summary>
+            Returns a collection of all registered versions for the given <paramref name="dbTransaction"/> or
+            empty collection if no migration versions were registered.
+            </summary>
+            <param name="dbTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager.GetCurrentMigrationVersion(System.Data.IDbTransaction)">
+            <summary>
+            Returns a value which contains the maximum migration version for the given <paramref name="dbTransaction"/>
+            or <c>null</c> if no versioning information is present.
+            </summary>
+            <param name="dbTransaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbMigrationVersionInfoManager.RegisterMigrationVersion(System.Data.IDbTransaction,octalforty.Wizardby.Core.Migration.MigrationMode,System.Int64)">
+            <summary>
+            Registers the fact of migrating to version <paramref name="version"/> with mode <paramref name="migrationMode"/>
+            for the given <paramref name="dbTransaction"/>.
+            </summary>
+            <param name="dbTransaction"></param>
+            <param name="migrationMode"></param>
+            <param name="version"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbNamingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.DbNamingCompilerStage.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider">
+            <summary>
+            Represents an provider which abstracts access to Native SQL resources
+            to be executed as a part of migration process for <c>execute native-sql</c>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider.GetUpgradeResources(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,System.Int64)">
+            <summary>
+            Returns an array of <see cref="T:System.String"/> object which contains a Native SQL resource <paramref name="name"/>
+            to be executed while upgrading to version <paramref name="version"/> 
+            for platform <paramref name="dbPlatform"/>.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="name"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider.GetDowngradeResources(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,System.Int64)">
+            <summary>
+            Returns an array of <see cref="T:System.String"/> object which contains a Native SQL resource <paramref name="name"/>
+            to be executed while downgrading from version <paramref name="version"/> 
+            for platform <paramref name="dbPlatform"/>.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="name"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.FileSystemNativeSqlResourceProvider.GetUpgradeResources(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,System.Int64)">
+            <summary>
+            Returns an array of <see cref="T:System.String"/> object which contains a Native SQL resource <paramref name="name"/>
+            to be executed while upgrading to version <paramref name="version"/> 
+            for platform <paramref name="dbPlatform"/>.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="name"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.FileSystemNativeSqlResourceProvider.GetDowngradeResources(octalforty.Wizardby.Core.Db.IDbPlatform,System.String,System.Int64)">
+            <summary>
+            Returns an array of <see cref="T:System.String"/> object which contains a Native SQL resource <paramref name="name"/>
+            to be executed while downgrading from version <paramref name="version"/> 
+            for platform <paramref name="dbPlatform"/>.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="name"></param>
+            <param name="version"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.Impl.MigrationModeSelector">
+            <summary>
+            Performs selection of <see cref="T:octalforty.Wizardby.Core.Migration.MigrationMode"/> depending on versions.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationModeSelector.GetMigrationMode(System.Int64,System.Nullable{System.Int64})">
+            <summary>
+            Returns a member of <see cref="T:octalforty.Wizardby.Core.Migration.MigrationMode"/> given a <paramref name="currentVersion"/> and a <paramref name="targetVersion"/>.
+            </summary>
+            <param name="currentVersion"></param>
+            <param name="targetVersion"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.Impl.MigrationScriptSelector">
+            <summary>
+            Performs selection of <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationScript"/> to perform upgrades or downgrades.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationScriptSelector.SelectMigrationScripts(System.Int64,System.Nullable{System.Int64},octalforty.Wizardby.Core.Migration.MigrationMode,System.Int64[],System.Collections.Generic.IEnumerable{octalforty.Wizardby.Core.Migration.Impl.MigrationScript})">
+            <summary>
+            Returns a collection of <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationScript"/> objects to perform migration (<paramref name="migrationMode"/>)
+            from <paramref name="currentVersion"/> to <paramref name="targetVersion"/>.
+            </summary>
+            <param name="currentVersion"></param>
+            <param name="targetVersion"></param>
+            <param name="migrationMode"></param>
+            <param name="registeredVersions"></param>
+            <param name="migrationScripts"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService">
+            <summary>
+            Standard implementation of the <see cref="T:octalforty.Wizardby.Core.Migration.IMigrationService"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationService.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform,octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager,octalforty.Wizardby.Core.Migration.Impl.IMigrationScriptExecutive,octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/> class.
+            </summary>
+            <param name="dbPlatform"></param>
+            <param name="migrationVersionInfoManager"></param>
+            <param name="migrationScriptExecutive"></param>
+            <param name="nativeSqlResourceProvider"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationService.Migrate(System.String,System.Nullable{System.Int64},System.IO.TextReader)">
+            <summary>
+            Migrates the database identified by the <paramref name="connectionString"/> using
+            <paramref name="migrationDefinition"/> to version <paramref name="targetVersion"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="targetVersion">Required version of the database schema</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationService.Rollback(System.String,System.Int32,System.IO.TextReader)">
+            <summary>
+            Rolls back <paramref name="step"/> last versions of the the database identified by the 
+            <paramref name="connectionString"/> using <paramref name="migrationDefinition"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="step">Number of versions to roll back</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Migration.Impl.MigrationService.Redo(System.String,System.Int32,System.IO.TextReader)">
+            <summary>
+            Redoes <paramref name="step"/> last versions of the the database identified by the
+            <paramref name="connectionString"/> using <paramref name="migrationDefinition"/>.
+            </summary>
+            <param name="connectionString">The connection string used to connect to the database</param>
+            <param name="step">Number of versions to reapply</param>
+            <param name="migrationDefinition">Migration definition</param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Migration.Impl.MigrationService.DbPlatform">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> used by this <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/>.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Migration.Impl.MigrationService.MigrationVersionInfoManager">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Migration.IMigrationVersionInfoManager"/> that provides
+            migration version information for this <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/>.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Migration.Impl.MigrationService.MigrationScriptExecutive">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> used by this <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/>.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Migration.Impl.MigrationService.NativeSqlResourceProvider">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.Migration.INativeSqlResourceProvider"/> used by this <see cref="T:octalforty.Wizardby.Core.Migration.Impl.MigrationService"/>.
+            </summary>
+        </member>
+        <member name="E:octalforty.Wizardby.Core.Migration.Impl.MigrationService.Migrating">
+            <summary>
+            Occurs when starting migrating to a version <see cref="P:octalforty.Wizardby.Core.Migration.MigrationEventArgs.Version"/>.
+            </summary>
+        </member>
+        <member name="E:octalforty.Wizardby.Core.Migration.Impl.MigrationService.Migrated">
+            <summary>
+            Occurs when successfully completed migrating to a version <see cref="P:octalforty.Wizardby.Core.Migration.MigrationEventArgs.Version"/>.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Migration.MigrationMode.Upgrade">
+            <summary>
+            Indicates that the database schema is being upgraded.
+            </summary>
+        </member>
+        <member name="F:octalforty.Wizardby.Core.Migration.MigrationMode.Downgrade">
+            <summary>
+            Indicates that the database schema is being downgraded.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Properties.Resources.ErrorWhileDowngradingToVersion">
+            <summary>
+              Looks up a localized string similar to An error occured while downgrading to version {0}: {1}.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Properties.Resources.ErrorWhileUpgradingToVersion">
+            <summary>
+              Looks up a localized string similar to An error occured while upgrading to version {0}: {1}.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Refactoring.RefactoringAttribute">
+            <summary>
+            Defines Refactoring metadata.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.Refactoring.RefactoringAttribute.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.Refactoring.RefactoringAttribute"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="alias"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Refactoring.RefactoringAttribute.Name">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains a human-readable name of the Refactoring.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Refactoring.RefactoringAttribute.Alias">
+            <summary>
+            Gets a <see cref="T:System.String"/> which contains an alias for the current Refactoring.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Resources.MdlCompilerResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolveFkColumnForAddReference">
+            <summary>
+              Looks up a localized string similar to Could not resolve Foreign Key Column or Foreign Key Columns for Add Reference &apos;{0}&apos;. You might be missing &apos;fk-column&apos; or &apos;fk-columns&apos; property or &apos;add reference&apos; is nested incorrectly..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolveFkTableForAddReference">
+            <summary>
+              Looks up a localized string similar to Could not resolve Foreign Key Table for Add Reference &apos;{0}&apos;. You might be missing a &apos;fk-table&apos; property or &apos;add reference&apos; is nested incorrectly..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolvePkTableForAddReference">
+            <summary>
+              Looks up a localized string similar to Could not resolve Primary Key Table for Add Reference &apos;{0}&apos;. You might be missing a &apos;pk-table&apos; property..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolveReferenceDefinition">
+            <summary>
+              Looks up a localized string similar to Could not resolve Reference Definition &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolveTableForAddIndex">
+            <summary>
+              Looks up a localized string similar to Could not resolve Table for Add Index &apos;{0}&apos;. You might be missing a &apos;table&apos; property or &apos;add index&apos; is nested incorrectly..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.CouldNotResolveTableForRemoveIndex">
+            <summary>
+              Looks up a localized string similar to Could not resolve Table for Remove Index &apos;{0}&apos;. You might be missing a &apos;table&apos; property or &apos;remove index&apos; is nested incorrectly..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlCompilerResources.UnknownType">
+            <summary>
+              Looks up a localized string similar to Unknown type &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.Resources.MdlParser">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.ExpectedMigrationNameForMigrationAt">
+            <summary>
+              Looks up a localized string similar to Expected migration name (string or symbol) for &apos;migration&apos; element at {0}..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.ExpectedVersionNumberForVersionAt">
+            <summary>
+              Looks up a localized string similar to Expected version number (integer) for &apos;version&apos; element at {0}..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.IncorrectLayoutAt">
+            <summary>
+              Looks up a localized string similar to Incorrect layout at {0}..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.UnexpectedEndOfInputWhileParsing">
+            <summary>
+              Looks up a localized string similar to Unexpected end of input while parsing &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.Resources.MdlParser.UnexpectedTokenAt">
+            <summary>
+              Looks up a localized string similar to Unexpected &apos;{0}&apos; ({1}) at {2}..
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase">
+            <summary>
+            Provides a base implementation of <see cref="T:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinition"/>.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase"/> class.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.SchemaElementDefinitionBase.Name">
+            <summary>
+            Gets or sets a string which contains the name of the current schema element.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.#ctor(octalforty.Wizardby.Core.SemanticModel.IColumnDefinition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition"/> class.
+            </summary>
+            <param name="columnDefinition"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.#ctor(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="type"></param>
+            <param name="nullable"></param>
+            <param name="length"></param>
+            <param name="scale"></param>
+            <param name="precision"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.#ctor(System.String,System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="table"></param>
+            <param name="type"></param>
+            <param name="nullable"></param>
+            <param name="length"></param>
+            <param name="scale"></param>
+            <param name="precision"></param>
+            <param name="primaryKey"></param>
+            <param name="identity"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Table">
+            <summary>
+            Gets or sets a string which contains the name of the table this
+            column belongs to.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Type">
+            <summary>
+            Gets or sets a <see cref="T:System.Data.DbType"/> member which represents the type of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Identity">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is identity column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Nullable">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is nullable or not.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Length">
+            <summary>
+            Gets or sets a value which contains the length of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Scale">
+            <summary>
+            Gets or sets a value which contains the scale of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.Precision">
+            <summary>
+            Gets or sets a value which contains the precision of the current column.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ColumnDefinition.PrimaryKey">
+            <summary>
+            Gets or sets a flag which indicates whether the current column is a primary key column.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.IndexDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.IndexDefinition"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.IndexDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.#ctor(System.String,octalforty.Wizardby.Core.SemanticModel.IIndexColumnDefinition[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.IndexDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="columns"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.Table">
+            <summary>
+            Get or sets a string which contains the name of the table of index.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.Columns">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IIndexColumnDefinition"/> objects
+            which represent the columns within this index.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.Unique">
+            <summary>
+            Gets or sets a flag which indicates whether the current index or unique or not.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.IndexDefinition.Clustered">
+            <summary>
+            Gets or sets a flag which indicates whether the current index or clustered or not.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.ISchemaDefinition">
+            <summary>
+            Represents database schema.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinitionCollection`1">
+            <summary>
+            Represents a collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinition"/> objects.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinitionCollection`1.Count">
+            <summary>
+            Gets the number of elements in the collection.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ISchemaElementDefinitionCollection`1.Item(System.Int32)">
+            <summary>
+            Gets a reference to the element of the collection.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.ITableDefinition">
+            <summary>
+            Represents a table within a database schema.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetColumn(System.String)">
+            <summary>
+            Returns a column named <paramref name="name"/> or <c>null</c> if no column
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.AddColumn(octalforty.Wizardby.Core.SemanticModel.IColumnDefinition)">
+            <summary>
+            Adds <paramref name="column"/> to the list of columns.
+            </summary>
+            <param name="column"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.RemoveColumn(System.String)">
+            <summary>
+            Removes column named <paramref name="name"/> from the list of columns.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetIndex(System.String)">
+            <summary>
+            Returns an index named <paramref name="name"/> or <c>null</c> if no index
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.AddIndex(octalforty.Wizardby.Core.SemanticModel.IIndexDefinition)">
+            <summary>
+            Adds <paramref name="index"/> to the list of indexes.
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.RemoveIndex(System.String)">
+            <summary>
+            Removes index named <paramref name="name"/> from the list of indexes.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetReference(System.String)">
+            <summary>
+            Returns a reference named <paramref name="name"/> or <c>null</c> if no reference
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.AddReference(octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition)">
+            <summary>
+            Adds <paramref name="reference"/> to the list of references.
+            </summary>
+            <param name="reference"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.RemoveReference(System.String)">
+            <summary>
+            Removes reference named <paramref name="name"/> from the list of references.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetConstraint(System.String)">
+            <summary>
+            Returns a constraint named <paramref name="name"/> or <c>null</c> if no reference
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.AddConstraint(octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition)">
+            <summary>
+            Adds <paramref name="constraint"/> to the list of constraints.
+            </summary>
+            <param name="constraint"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.RemoveConstraint(System.String)">
+            <summary>
+            Removes constraint named <paramref name="name"/> from the list of references.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetPrimaryKeyColumns">
+            <summary>
+            Gets a reference to the array of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition"/> which represent the 
+            primary key columns of the current table.
+            </summary>
+            <remarks>
+            <see cref="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetPrimaryKeyColumns"/> returns more than one <see cref="T:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition"/> only if
+            this table has composite key defined.
+            <para/>
+            If this table does not have a PK defined, <see cref="M:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.GetPrimaryKeyColumns"/> returns <c>null</c>.
+            </remarks>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.Schema">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ISchemaDefinition"/>, which represents
+            the schema of the current table or <c>null</c> if no schema is defined.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.Columns">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.Indexes">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.References">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.ITableDefinition.Constraints">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.Schema">
+            <summary>
+            Represents a point-in-time schema of a database.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.Schema.Tables">
+            <summary>
+            Gets a read-only collection of all tables in this schema.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.Schema.Schemas">
+            <summary>
+            Gets a read-only collection of all schemas in this schema.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SemanticModelUtil.Copy(octalforty.Wizardby.Core.SemanticModel.IColumnDefinition,octalforty.Wizardby.Core.SemanticModel.IColumnDefinition)">
+            <summary>
+            Copies all properties from <paramref name="sourceColumn"/> to <paramref name="targetColumn"/>.
+            </summary>
+            <param name="sourceColumn"></param>
+            <param name="targetColumn"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SemanticModelUtil.Copy(octalforty.Wizardby.Core.SemanticModel.IIndexDefinition,octalforty.Wizardby.Core.SemanticModel.IIndexDefinition)">
+            <summary>
+            Copies all properties from <paramref name="sourceIndex"/> to <paramref name="targetIndex"/>.
+            </summary>
+            <param name="sourceIndex"></param>
+            <param name="targetIndex"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SemanticModelUtil.Copy(octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition,octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition)">
+            <summary>
+            Copies all properties from <paramref name="sourceReference"/> to <paramref name="targetReference"/>.
+            </summary>
+            <param name="sourceReference"></param>
+            <param name="targetReference"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.SemanticModelUtil.Clone(octalforty.Wizardby.Core.SemanticModel.IIndexColumnDefinition)">
+            <summary>
+            Clones the given <paramref name="indexColumn"/>.
+            </summary>
+            <param name="indexColumn"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Core.SemanticModel.TableDefinition">
+            <summary>
+            Standard <see cref="T:octalforty.Wizardby.Core.SemanticModel.ITableDefinition"/> implementation.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.TableDefinition"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.TableDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.#ctor(System.String,octalforty.Wizardby.Core.SemanticModel.ISchemaDefinition)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Core.SemanticModel.TableDefinition"/> class.
+            </summary>
+            <param name="name"></param>
+            <param name="schema"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.GetColumn(System.String)">
+            <summary>
+            Returns a column named <paramref name="name"/> or <c>null</c> if no column
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.AddColumn(octalforty.Wizardby.Core.SemanticModel.IColumnDefinition)">
+            <summary>
+            Adds <paramref name="column"/> to the list of columns.
+            </summary>
+            <param name="column"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.RemoveColumn(System.String)">
+            <summary>
+            Removes column named <paramref name="name"/> from the list of columns.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.GetIndex(System.String)">
+            <summary>
+            Returns an index named <paramref name="name"/> or <c>null</c> if no index
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.AddIndex(octalforty.Wizardby.Core.SemanticModel.IIndexDefinition)">
+            <summary>
+            Adds <paramref name="index"/> to the list of indexes.
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.RemoveIndex(System.String)">
+            <summary>
+            Removes index named <paramref name="name"/> from the list of indexes.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.GetReference(System.String)">
+            <summary>
+            Returns a reference named <paramref name="name"/> or <c>null</c> if no reference
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.AddReference(octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition)">
+            <summary>
+            Adds <paramref name="reference"/> to the list of references.
+            </summary>
+            <param name="reference"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.RemoveReference(System.String)">
+            <summary>
+            Removes reference named <paramref name="name"/> from the list of references.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.GetConstraint(System.String)">
+            <summary>
+            Returns a constraint named <paramref name="name"/> or <c>null</c> if no reference
+            with the given name exists.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.AddConstraint(octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition)">
+            <summary>
+            Adds <paramref name="constraint"/> to the list of constraints.
+            </summary>
+            <param name="constraint"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Core.SemanticModel.TableDefinition.RemoveConstraint(System.String)">
+            <summary>
+            Removes constraint named <paramref name="name"/> from the list of references.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.TableDefinition.Schema">
+            <summary>
+            Gets or sets a reference to the <see cref="T:octalforty.Wizardby.Core.SemanticModel.ISchemaDefinition"/>, which represents
+            the schema of the current table or <c>null</c> if no schema is defined.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.TableDefinition.Columns">
+            <summary>
+            Gets a reference to the collection if <see cref="T:octalforty.Wizardby.Core.SemanticModel.IColumnDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.TableDefinition.Indexes">
+            <summary>
+            Gets a reference to the collection if <see cref="T:octalforty.Wizardby.Core.SemanticModel.IIndexDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.TableDefinition.References">
+            <summary>
+            Gets a reference to the collection if <see cref="T:octalforty.Wizardby.Core.SemanticModel.IReferenceDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Core.SemanticModel.TableDefinition.Constraints">
+            <summary>
+            Gets a reference to the collection of <see cref="T:octalforty.Wizardby.Core.SemanticModel.IConstraintDefinition"/> objects
+            for the current table.
+            </summary>
+        </member>
+    </members>
+</doc>
