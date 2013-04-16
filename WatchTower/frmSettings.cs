@@ -75,14 +75,7 @@ namespace WatchTower
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 textMoviePath.Text = folderBrowserDialog.SelectedPath;
-
         }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            MainForm.SetFontSize(Decimal.ToInt32(NumUDFontSize.Value)); 
-        }
-
 
     }
 }

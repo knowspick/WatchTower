@@ -229,7 +229,6 @@
             this.NumUDFontSize.Name = "NumUDFontSize";
             this.NumUDFontSize.Size = new System.Drawing.Size(120, 20);
             this.NumUDFontSize.TabIndex = 28;
-            this.NumUDFontSize.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label5
             // 

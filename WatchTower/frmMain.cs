@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using BrightIdeasSoftware;
 using System.Data.SQLite;
 using WatchTower.Entities;
 
@@ -33,6 +32,8 @@ namespace WatchTower
 
         private void DisplayListInFlowLayout(List<Episode> list, FlowLayoutPanel flow)
         {
+            flow.Controls.Clear();
+
             List<DisplaySeries> DList = new List<DisplaySeries>();
             foreach (Episode eps in list)
             {
@@ -49,9 +50,51 @@ namespace WatchTower
             //now display the items atlast
             foreach (DisplaySeries ds in DList)
             {
-                Panel tp = new Panel();
-                tp.cl
-                flow.Controls.Add(Dpanel);
+                Font tfont = new Font("Calibri", 20, FontStyle.Bold);
+
+                FlowLayoutPanel tp = new FlowLayoutPanel();
+                tp.BackColor = Color.DarkBlue;
+                tp.ForeColor = Color.LightGray;
+                tp.AutoSize = true;
+                tp.WrapContents = false;
+                tp.Width = 351;
+                tp.Height = 41;
+
+                Label ln = new Label();
+                ln.Text = ds.epsisodes.Count.ToString();
+                ln.Font = tfont;
+                ln.Height = 33;
+                ln.Width = 33;
+                tp.Controls.Add(ln);
+
+                Label lname = new Label();
+                lname.Text = ds.series.Name;
+                lname.Font = tfont;
+                lname.Left = 38;
+                lname.Height = 33;
+                lname.Width = 272;
+                tp.Controls.Add(lname);
+
+
+                FlowLayoutPanel flowBut = new FlowLayoutPanel();
+                flowBut.AutoSize = true;
+                flowBut.WrapContents = false;
+                if (flow.Name != "flowWanted")
+                {
+                    Button butWant = new Button();
+                    butWant.Text = "Want";
+                    flowBut.Controls.Add(butWant);
+                }
+                if (flow.Name != "flowUnWanted")
+                {
+                    Button butDont = new Button();
+                    butDont.Text = "Don't Want";
+                    flowBut.Controls.Add(butDont);
+                }
+                tp.Controls.Add(flowBut);
+
+
+                flow.Controls.Add(tp);
             }
         }
 
@@ -112,18 +155,10 @@ namespace WatchTower
                 UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
             }
 
-            //display the 3 list                        
+            //display the 3 list            
             DisplayListInFlowLayout(WantedEps, flowWanted);
             DisplayListInFlowLayout(UnratedEps, flowUnrated);
             DisplayListInFlowLayout(UnWantedEps, flowUnWanted);
-        }
-
-
-        public void SetFontSize(int AFontSize)
-        {
-            Font NewFont = new Font(listViewMovies.Font.Name, AFontSize, listViewMovies.Font.Style, listViewMovies.Font.Unit);
-            listViewMovies.Font = NewFont;
-            listViewEps.Font = NewFont;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -135,8 +170,6 @@ namespace WatchTower
         {
             WTEntities = new WatchTowerEF();
             System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
-
-            SetFontSize(Properties.Settings.Default.FontSize);
 
             timerUpdateFiles.Interval = 1;
         }
@@ -220,9 +253,9 @@ namespace WatchTower
             SelectedProfiles.Clear();
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
-
+            flowUnWanted.Visible = !flowUnWanted.Visible;
         }
 
     }
