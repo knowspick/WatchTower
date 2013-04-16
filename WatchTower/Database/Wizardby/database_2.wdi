@@ -1,0 +1,4 @@
+deployment:
+    environment development
+        platform            => sqlite
+        database            => "..\..\bin\Debug\WatchTower.db"

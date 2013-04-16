@@ -45,17 +45,22 @@
             this.colEpsDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.popupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.butSettings = new System.Windows.Forms.Button();
-            this.panelProfiles = new System.Windows.Forms.Panel();
-            this.timerUpdateFiles = new System.Windows.Forms.Timer(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowWanted = new System.Windows.Forms.FlowLayoutPanel();
             this.labelWanted = new System.Windows.Forms.Label();
+            this.flowWanted = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.flowUnrated = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.flowUnWanted = new System.Windows.Forms.FlowLayoutPanel();
+            this.butSettings = new System.Windows.Forms.Button();
+            this.panelProfiles = new System.Windows.Forms.Panel();
+            this.timerUpdateFiles = new System.Windows.Forms.Timer(this.components);
+            this.Dpanel = new System.Windows.Forms.Panel();
+            this.lblNo = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.listViewMovies)).BeginInit();
@@ -64,6 +69,8 @@
             this.popupMenu.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanelMain.SuspendLayout();
+            this.flowUnrated.SuspendLayout();
+            this.Dpanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -96,7 +103,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(905, 468);
+            this.tabPage1.Size = new System.Drawing.Size(567, 201);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Movies";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -150,7 +157,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(905, 468);
+            this.tabPage2.Size = new System.Drawing.Size(567, 201);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Episodes";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -254,31 +261,6 @@
             this.toolStripMenuItem1.Text = "Don\'t want to see this series";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // butSettings
-            // 
-            this.butSettings.Location = new System.Drawing.Point(173, 12);
-            this.butSettings.Name = "butSettings";
-            this.butSettings.Size = new System.Drawing.Size(133, 27);
-            this.butSettings.TabIndex = 13;
-            this.butSettings.Text = "Settings";
-            this.butSettings.UseVisualStyleBackColor = true;
-            this.butSettings.Click += new System.EventHandler(this.butSettings_Click);
-            // 
-            // panelProfiles
-            // 
-            this.panelProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelProfiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelProfiles.Location = new System.Drawing.Point(354, 12);
-            this.panelProfiles.Name = "panelProfiles";
-            this.panelProfiles.Size = new System.Drawing.Size(235, 41);
-            this.panelProfiles.TabIndex = 16;
-            // 
-            // timerUpdateFiles
-            // 
-            this.timerUpdateFiles.Enabled = true;
-            this.timerUpdateFiles.Interval = 1800000;
-            this.timerUpdateFiles.Tick += new System.EventHandler(this.timerUpdateFiles_Tick);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.flowLayoutPanelMain);
@@ -311,6 +293,18 @@
             this.flowLayoutPanelMain.TabIndex = 0;
             this.flowLayoutPanelMain.WrapContents = false;
             // 
+            // labelWanted
+            // 
+            this.labelWanted.AutoSize = true;
+            this.labelWanted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.labelWanted.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWanted.Location = new System.Drawing.Point(3, 0);
+            this.labelWanted.MinimumSize = new System.Drawing.Size(400, 0);
+            this.labelWanted.Name = "labelWanted";
+            this.labelWanted.Size = new System.Drawing.Size(400, 19);
+            this.labelWanted.TabIndex = 1;
+            this.labelWanted.Text = "Wanted";
+            // 
             // flowWanted
             // 
             this.flowWanted.AutoSize = true;
@@ -325,18 +319,6 @@
             this.flowWanted.TabIndex = 0;
             this.flowWanted.WrapContents = false;
             // 
-            // labelWanted
-            // 
-            this.labelWanted.AutoSize = true;
-            this.labelWanted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.labelWanted.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWanted.Location = new System.Drawing.Point(3, 0);
-            this.labelWanted.MinimumSize = new System.Drawing.Size(400, 0);
-            this.labelWanted.Name = "labelWanted";
-            this.labelWanted.Size = new System.Drawing.Size(400, 19);
-            this.labelWanted.TabIndex = 1;
-            this.labelWanted.Text = "Wanted";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -344,7 +326,7 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 75);
-            this.label1.MinimumSize = new System.Drawing.Size(400, 0);
+            this.label1.MinimumSize = new System.Drawing.Size(400, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(400, 21);
             this.label1.TabIndex = 2;
@@ -356,11 +338,12 @@
             this.flowUnrated.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowUnrated.BackColor = System.Drawing.Color.WhiteSmoke;
             this.flowUnrated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowUnrated.Controls.Add(this.Dpanel);
             this.flowUnrated.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowUnrated.Location = new System.Drawing.Point(3, 99);
-            this.flowUnrated.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowUnrated.MinimumSize = new System.Drawing.Size(400, 50);
             this.flowUnrated.Name = "flowUnrated";
-            this.flowUnrated.Size = new System.Drawing.Size(100, 50);
+            this.flowUnrated.Size = new System.Drawing.Size(400, 50);
             this.flowUnrated.TabIndex = 1;
             this.flowUnrated.WrapContents = false;
             // 
@@ -371,7 +354,7 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 152);
-            this.label2.MinimumSize = new System.Drawing.Size(400, 0);
+            this.label2.MinimumSize = new System.Drawing.Size(400, 2);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(400, 21);
             this.label2.TabIndex = 3;
@@ -390,6 +373,81 @@
             this.flowUnWanted.Size = new System.Drawing.Size(100, 50);
             this.flowUnWanted.TabIndex = 2;
             this.flowUnWanted.WrapContents = false;
+            // 
+            // butSettings
+            // 
+            this.butSettings.Location = new System.Drawing.Point(173, 12);
+            this.butSettings.Name = "butSettings";
+            this.butSettings.Size = new System.Drawing.Size(133, 27);
+            this.butSettings.TabIndex = 13;
+            this.butSettings.Text = "Settings";
+            this.butSettings.UseVisualStyleBackColor = true;
+            this.butSettings.Click += new System.EventHandler(this.butSettings_Click);
+            // 
+            // panelProfiles
+            // 
+            this.panelProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelProfiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelProfiles.Location = new System.Drawing.Point(354, 12);
+            this.panelProfiles.Name = "panelProfiles";
+            this.panelProfiles.Size = new System.Drawing.Size(235, 41);
+            this.panelProfiles.TabIndex = 16;
+            // 
+            // timerUpdateFiles
+            // 
+            this.timerUpdateFiles.Enabled = true;
+            this.timerUpdateFiles.Interval = 1800000;
+            this.timerUpdateFiles.Tick += new System.EventHandler(this.timerUpdateFiles_Tick);
+            // 
+            // Dpanel
+            // 
+            this.Dpanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Dpanel.Controls.Add(this.lblName);
+            this.Dpanel.Controls.Add(this.lblNo);
+            this.Dpanel.Controls.Add(this.shapeContainer1);
+            this.Dpanel.Location = new System.Drawing.Point(3, 3);
+            this.Dpanel.Name = "Dpanel";
+            this.Dpanel.Size = new System.Drawing.Size(351, 41);
+            this.Dpanel.TabIndex = 0;
+            // 
+            // lblNo
+            // 
+            this.lblNo.AutoSize = true;
+            this.lblNo.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNo.Location = new System.Drawing.Point(3, 3);
+            this.lblNo.Name = "lblNo";
+            this.lblNo.Size = new System.Drawing.Size(43, 33);
+            this.lblNo.TabIndex = 0;
+            this.lblNo.Text = "30";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(64, 3);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(272, 33);
+            this.lblName.TabIndex = 1;
+            this.lblName.Text = "Dancing with the starts";
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(349, 39);
+            this.shapeContainer1.TabIndex = 2;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 53;
+            this.lineShape1.X2 = 53;
+            this.lineShape1.Y1 = 0;
+            this.lineShape1.Y2 = 39;
             // 
             // frmMain
             // 
@@ -415,6 +473,9 @@
             this.tabPage3.ResumeLayout(false);
             this.flowLayoutPanelMain.ResumeLayout(false);
             this.flowLayoutPanelMain.PerformLayout();
+            this.flowUnrated.ResumeLayout(false);
+            this.Dpanel.ResumeLayout(false);
+            this.Dpanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -447,6 +508,11 @@
         private System.Windows.Forms.FlowLayoutPanel flowUnrated;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowUnWanted;
+        private System.Windows.Forms.Panel Dpanel;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblNo;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
     }
 }
 

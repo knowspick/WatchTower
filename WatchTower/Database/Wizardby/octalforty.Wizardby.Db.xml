@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>octalforty.Wizardby.Db</name>
+    </assembly>
+    <members>
+        <member name="M:octalforty.Wizardby.Db.Jet.JetConnectionStringBuilder.ToString">
+            <summary>
+            Returns the connection string associated with this <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.Jet.JetPlatform">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> implementation for the Microsoft Jet database.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.Jet.JetPlatform.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.Jet.JetPlatform"/> class.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator">
+            <summary>
+            Provides Microsoft SQL Server 2000-specific DDL generation.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator.#ctor(octalforty.Wizardby.Core.Db.IDbStatementBatchWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator"/>.
+            </summary>
+            <param name="statementBatchWriter"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddReferenceNode)">
+            <summary>
+            Visits the given <paramref name="addReferenceNode"/>.
+            </summary>
+            <param name="addReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveTableNode)">
+            <summary>
+            Visits the given <paramref name="removeTableNode"/>.
+            </summary>
+            <param name="removeTableNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveReferenceNode)">
+            <summary>
+            Visits the given <paramref name="removeReferenceNode"/>.
+            </summary>
+            <param name="removeReferenceNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.Jet.JetTypeMapper">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbTypeMapper"/> implementation for the Microsoft Jet database.
+            </summary>
+            <remarks>
+            See http://support.microsoft.com/kb/320435 (OleDbType Enumeration vs. Microsoft Access Data Types) for
+            information on type mappings.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.Jet.JetTypeMapper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.Jet.JetTypeMapper"/> class.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Db.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Db.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Db.Properties.Resources.UnknownDataType">
+            <summary>
+              Looks up a localized string similar to Unknown data type: &apos;DbType.{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:octalforty.Wizardby.Db.Properties.Resources.UnknownSchemaForTable">
+            <summary>
+              Looks up a localized string similar to Unknown Schema &apos;{0}&apos; for Table &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlCe.SqlCeSchemaProvider">
+            <summary>
+            
+            </summary>
+            <remarks>
+            http://arjunachith.blogspot.com/2007/08/retrieving-schema-information-of-sql-ce.html
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlCe.SqlCeScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IAddIndexNode)">
+            <summary>
+            Visits the given <paramref name="addIndexNode"/>.
+            </summary>
+            <param name="addIndexNode"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlCe.SqlCeScriptGenerator.Visit(octalforty.Wizardby.Core.Compiler.Ast.IRemoveIndexNode)">
+            <summary>
+            Visits the given <paramref name="removeIndexNode"/>.
+            </summary>
+            <param name="removeIndexNode"></param>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlCe.SqlCeTypeMapper">
+            <summary>
+            Maps logical database types (<see cref="T:System.Data.DbType"/>) to SQL CE-specific types.
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-us/library/ms172424(v=SQL.100).aspx
+            </remarks>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000TypeMapper">
+            <summary>
+            
+            </summary>
+            <remarks>
+            See http://msdn.microsoft.com/en-us/library/cc716729.aspx for information on mapping.
+            </remarks>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000TypeMapper.MapToDbType(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Maps <paramref name="nativeType"/> to an appropriate <see cref="T:System.Data.DbType"/> value.
+            </summary>
+            <param name="nativeType"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlCe.SqlCeTypeMapper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlCe.SqlCeTypeMapper"/> class.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ConnectionStringBuilder">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbConnectionStringBuilder"/> implementation for Microsoft SQL Server 2000.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ConnectionStringBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000ConnectionStringBuilder"/>.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000Platform">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> implementation for Microsoft SQL Server 2000.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000Platform.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000Platform"/> class.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbSchemaProvider"/> for Microsoft SQL Server 2000.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider"/> class.
+            </summary>
+            <param name="platform"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2000.SqlServer2000SchemaProvider.GetTableDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            tables, their columns and primary keys in the database defined by the 
+            <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+            <returns></returns>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005Platform">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbPlatform"/> implementation for the Microsoft SQL Server 2005.
+            </summary>
+        </member>
+        <member name="T:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider">
+            <summary>
+            A <see cref="T:octalforty.Wizardby.Core.Db.IDbSchemaProvider"/> for Microsoft SQL Server 2005.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider.#ctor(octalforty.Wizardby.Core.Db.IDbPlatform)">
+            <summary>
+            Initializes a new instance of the <see cref="T:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider"/> class.
+            </summary>
+            <param name="platform"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider.GetReferenceDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            references in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+        <member name="M:octalforty.Wizardby.Db.SqlServer2005.SqlServer2005SchemaProvider.GetIndexDefinitions(System.String,octalforty.Wizardby.Core.SemanticModel.Schema)">
+            <summary>
+            When overriden in derived class, retrieves a collection of all
+            indexes in the database defined by the <see cref="!:connectionString"/>.
+            </summary>
+            <param name="connectionString"></param>
+            <param name="databaseSchema"></param>
+        </member>
+    </members>
+</doc>
