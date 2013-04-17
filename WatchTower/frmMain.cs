@@ -59,6 +59,7 @@ namespace WatchTower
                 tp.WrapContents = false;
                 tp.Width = 351;
                 tp.Height = 41;
+                tp.Tag = ds;
 
                 Label ln = new Label();
                 ln.Text = ds.epsisodes.Count.ToString();
@@ -82,6 +83,8 @@ namespace WatchTower
                 if (flow.Name != "flowWanted")
                 {
                     Button butWant = new Button();
+                    butWant.Tag = ds;
+                    butWant.Click += butWant_Click;
                     butWant.Text = "Want";
                     flowBut.Controls.Add(butWant);
                 }
@@ -89,16 +92,46 @@ namespace WatchTower
                 {
                     Button butDont = new Button();
                     butDont.Text = "Don't Want";
+                    butDont.Click +=butDont_Click;
+                    butDont.Tag = ds;
                     flowBut.Controls.Add(butDont);
                 }
                 tp.Controls.Add(flowBut);
-
 
                 flow.Controls.Add(tp);
             }
         }
 
-       
+        void butDont_Click(object sender, EventArgs e)
+        {
+            SetSeriesRatingForProfiles(((sender as Button).Tag as DisplaySeries).series, false);
+        }
+
+        void butWant_Click(object sender, EventArgs e)
+        {
+            SetSeriesRatingForProfiles(((sender as Button).Tag as DisplaySeries).series, true);
+        }
+
+        private void SetSeriesRatingForProfiles(Series series, Boolean wantToWatch)
+        {
+            foreach (Profile profile in SelectedProfiles)
+            {
+                ProfileSeriesRel SeriesRel = WTEntities.ProfileSeriesRels.SingleOrDefault<ProfileSeriesRel>(
+                    psr => psr.ProfileId == profile.Id 
+                        && psr.SeriesId == series.Id
+                    );
+                if (SeriesRel == null)
+                {
+                    SeriesRel = WTEntities.ProfileSeriesRels.Add(new ProfileSeriesRel {
+                        ProfileId = profile.Id,
+                        SeriesId = series.Id
+                    });
+                }                
+                SeriesRel.WantToWatch = wantToWatch;            
+            }
+            WTEntities.SaveChanges();
+        }
+
         private void PoplateList()
         {
             //Movies

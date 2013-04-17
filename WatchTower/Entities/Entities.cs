@@ -78,8 +78,8 @@ namespace WatchTower.Entities
         [Required]
         public Boolean WantToWatch { get ; set; }
 
-        public virtual Profile Profile { get; set; }
-        public virtual Series Series { get; set; }
+        //public virtual Profile Profile { get; set; }
+        //public virtual Series Series { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
