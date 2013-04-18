@@ -127,7 +127,8 @@ namespace WatchTower
                         SeriesId = series.Id
                     });
                 }                
-                SeriesRel.WantToWatch = wantToWatch;            
+                SeriesRel.WantToWatch = wantToWatch;
+                
             }
             WTEntities.SaveChanges();
         }
@@ -289,6 +290,24 @@ namespace WatchTower
         private void label2_Click(object sender, EventArgs e)
         {
             flowUnWanted.Visible = !flowUnWanted.Visible;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            
+            WTEntities.ProfileSeriesRels.SingleOrDefault<ProfileSeriesRel>(
+                psr => psr.ProfileId == 1
+                    && psr.SeriesId == 51
+                ).WantToWatch = false;
+                //SeriesRel.WantToWatch = true;
+            
+            //WTEntities.tests.SingleOrDefault<test>(t => t.Id == 1).name = "x";
+            WTEntities.SaveChanges();
+
+            
+
+
         }
 
     }

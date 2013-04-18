@@ -26,11 +26,11 @@ namespace WatchTower
                     //Get or create series
                     SeriesName = new DirectoryInfo(seriesFolder).Name;
 
-                    Entities.Series SeriesItem = WTData.Series.Where<Entities.Series>
+                    Entities.Series SeriesItem = WTData.Serieses.Where<Entities.Series>
                         (s => s.Name == SeriesName).FirstOrDefault<Entities.Series>();
                     if (SeriesItem == null)
                     {
-                        SeriesItem = WTData.Series.Add(new Entities.Series
+                        SeriesItem = WTData.Serieses.Add(new Entities.Series
                         {                        
                             Name = SeriesName
                         });
