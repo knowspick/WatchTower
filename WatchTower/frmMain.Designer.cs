@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
@@ -47,22 +46,13 @@
             this.panelProfiles = new System.Windows.Forms.Panel();
             this.timerUpdateFiles = new System.Windows.Forms.Timer(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.flowEpisodeList = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanelMain.SuspendLayout();
             this.flowUnrated.SuspendLayout();
             this.Dpanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 36);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Update List";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl1
             // 
@@ -71,20 +61,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(14, 59);
+            this.tabControl1.Location = new System.Drawing.Point(5, 33);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(575, 229);
+            this.tabControl1.Size = new System.Drawing.Size(859, 472);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage3
             // 
+            this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage3.Controls.Add(this.flowLayoutPanelMain);
             this.tabPage3.Location = new System.Drawing.Point(4, 27);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(567, 198);
+            this.tabPage3.Size = new System.Drawing.Size(851, 441);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Episodes";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -106,9 +97,11 @@
             this.flowLayoutPanelMain.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelMain.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelMain.Name = "flowLayoutPanelMain";
-            this.flowLayoutPanelMain.Size = new System.Drawing.Size(558, 189);
+            this.flowLayoutPanelMain.Size = new System.Drawing.Size(840, 430);
             this.flowLayoutPanelMain.TabIndex = 0;
+            this.flowLayoutPanelMain.Visible = false;
             this.flowLayoutPanelMain.WrapContents = false;
+            this.flowLayoutPanelMain.Click += new System.EventHandler(this.flowLayoutPanelMain_Click);
             // 
             // labelWanted
             // 
@@ -130,9 +123,9 @@
             this.flowWanted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowWanted.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowWanted.Location = new System.Drawing.Point(3, 22);
-            this.flowWanted.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowWanted.MinimumSize = new System.Drawing.Size(400, 50);
             this.flowWanted.Name = "flowWanted";
-            this.flowWanted.Size = new System.Drawing.Size(100, 50);
+            this.flowWanted.Size = new System.Drawing.Size(400, 50);
             this.flowWanted.TabIndex = 0;
             this.flowWanted.WrapContents = false;
             // 
@@ -218,16 +211,15 @@
             this.flowUnWanted.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowUnWanted.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowUnWanted.Location = new System.Drawing.Point(3, 176);
-            this.flowUnWanted.MinimumSize = new System.Drawing.Size(100, 50);
+            this.flowUnWanted.MinimumSize = new System.Drawing.Size(400, 50);
             this.flowUnWanted.Name = "flowUnWanted";
-            this.flowUnWanted.Size = new System.Drawing.Size(100, 50);
+            this.flowUnWanted.Size = new System.Drawing.Size(400, 50);
             this.flowUnWanted.TabIndex = 2;
-            this.flowUnWanted.Visible = false;
             this.flowUnWanted.WrapContents = false;
             // 
             // butSettings
             // 
-            this.butSettings.Location = new System.Drawing.Point(173, 12);
+            this.butSettings.Location = new System.Drawing.Point(481, 12);
             this.butSettings.Name = "butSettings";
             this.butSettings.Size = new System.Drawing.Size(133, 27);
             this.butSettings.TabIndex = 13;
@@ -239,7 +231,7 @@
             // 
             this.panelProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelProfiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelProfiles.Location = new System.Drawing.Point(354, 12);
+            this.panelProfiles.Location = new System.Drawing.Point(629, 12);
             this.panelProfiles.Name = "panelProfiles";
             this.panelProfiles.Size = new System.Drawing.Size(235, 41);
             this.panelProfiles.TabIndex = 16;
@@ -252,24 +244,43 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(312, 25);
+            this.button2.Location = new System.Drawing.Point(304, 19);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(36, 23);
             this.button2.TabIndex = 17;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // flowEpisodeList
+            // 
+            this.flowEpisodeList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowEpisodeList.AutoScroll = true;
+            this.flowEpisodeList.BackColor = System.Drawing.Color.White;
+            this.flowEpisodeList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowEpisodeList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowEpisodeList.Location = new System.Drawing.Point(346, 12);
+            this.flowEpisodeList.MinimumSize = new System.Drawing.Size(20, 20);
+            this.flowEpisodeList.Name = "flowEpisodeList";
+            this.flowEpisodeList.Size = new System.Drawing.Size(129, 30);
+            this.flowEpisodeList.TabIndex = 18;
+            this.flowEpisodeList.Visible = false;
+            this.flowEpisodeList.WrapContents = false;
+            this.flowEpisodeList.Leave += new System.EventHandler(this.flowEpisodeList_Leave);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 302);
+            this.ClientSize = new System.Drawing.Size(876, 508);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.panelProfiles);
+            this.Controls.Add(this.flowEpisodeList);
             this.Controls.Add(this.butSettings);
+            this.Controls.Add(this.panelProfiles);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
@@ -289,7 +300,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button butSettings;
         private System.Windows.Forms.Panel panelProfiles;
@@ -306,6 +316,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblNo;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.FlowLayoutPanel flowEpisodeList;
     }
 }
 

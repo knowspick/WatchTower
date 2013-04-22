@@ -65,7 +65,9 @@ namespace WatchTower
                 ln.Text = ds.epsisodes.Count.ToString();
                 ln.Font = tfont;
                 ln.Height = 33;
-                ln.Width = 33;
+                ln.Width = 66;
+                ln.Tag = ds;
+                ln.Click += ln_Click;
                 tp.Controls.Add(ln);
 
                 Label lname = new Label();
@@ -74,42 +76,148 @@ namespace WatchTower
                 lname.Left = 38;
                 lname.Height = 33;
                 lname.Width = 272;
+                lname.Tag = ds;
+                lname.Click += lname_Click;
                 tp.Controls.Add(lname);
 
-
-                FlowLayoutPanel flowBut = new FlowLayoutPanel();
-                flowBut.AutoSize = true;
-                flowBut.WrapContents = false;
-                if (flow.Name != "flowWanted")
+                if (SelectedProfiles.Count == 1)
                 {
-                    Button butWant = new Button();
-                    butWant.Tag = ds;
-                    butWant.Click += butWant_Click;
-                    butWant.Text = "Want";
-                    flowBut.Controls.Add(butWant);
+                    FlowLayoutPanel flowBut = new FlowLayoutPanel();
+                    flowBut.AutoSize = true;
+                    flowBut.WrapContents = false; 
+                    if (flow.Name != "flowWanted")
+                    {
+                        Button butWant = new Button();
+                        butWant.Tag = ds;
+                        butWant.Click += butWant_Click;
+                        butWant.Text = "Want";
+                        flowBut.Controls.Add(butWant);
+                    }
+                    if (flow.Name != "flowUnWanted")
+                    {
+                        Button butDont = new Button();
+                        butDont.Text = "Don't Want";
+                        butDont.Click += butDont_Click;
+                        butDont.Tag = ds;
+                        flowBut.Controls.Add(butDont);
+                    }
+                    tp.Controls.Add(flowBut);
                 }
-                if (flow.Name != "flowUnWanted")
-                {
-                    Button butDont = new Button();
-                    butDont.Text = "Don't Want";
-                    butDont.Click +=butDont_Click;
-                    butDont.Tag = ds;
-                    flowBut.Controls.Add(butDont);
-                }
-                tp.Controls.Add(flowBut);
 
                 flow.Controls.Add(tp);
             }
         }
 
+        void lname_Click(object sender, EventArgs e)
+        {
+            ShowEpisodeList(((sender as Label).Tag as DisplaySeries).epsisodes);
+        }
+
+        void ln_Click(object sender, EventArgs e)
+        {
+            ShowEpisodeList(((sender as Label).Tag as DisplaySeries).epsisodes);
+        }
+
         void butDont_Click(object sender, EventArgs e)
         {
             SetSeriesRatingForProfiles(((sender as Button).Tag as DisplaySeries).series, false);
+            PoplateList();
         }
 
         void butWant_Click(object sender, EventArgs e)
         {
             SetSeriesRatingForProfiles(((sender as Button).Tag as DisplaySeries).series, true);
+            PoplateList();
+        }
+
+        private int GetRelativeLeft(Control control)
+        {
+            int RelitiveLeft = control.Left;
+
+            Control parentControl = control.Parent;
+            while (!(parentControl is Form))
+            {
+                RelitiveLeft += parentControl.Left;
+                parentControl = parentControl.Parent;
+            }
+            return RelitiveLeft;
+        }
+
+        private int GetRelativeTop(Control control)
+        {
+            int RelitiveTop = control.Top;
+
+            Control parentControl = control.Parent;
+            while (!(parentControl is Form))
+            {
+                RelitiveTop += parentControl.Top;
+                parentControl = parentControl.Parent;
+            }
+            return RelitiveTop;
+        }
+
+        void ShowEpisodeList(List<Episode> episodes)
+        {
+            flowEpisodeList.Controls.Clear();
+            flowEpisodeList.Left = GetRelativeLeft(flowLayoutPanelMain) + 200;
+            flowEpisodeList.Top = GetRelativeTop(flowLayoutPanelMain) + 5;
+            flowEpisodeList.Width = flowLayoutPanelMain.Width - flowEpisodeList.Left;
+            flowEpisodeList.Height = flowLayoutPanelMain.Height - 10;
+            flowEpisodeList.Visible = true;
+
+            Font tfont = new Font("Calibri", 20, FontStyle.Bold);
+
+            foreach (Episode eps in episodes)
+            {
+                FlowLayoutPanel tp = new FlowLayoutPanel();
+                tp.BackColor = Color.DarkBlue;
+                tp.ForeColor = Color.LightGray;
+                tp.AutoSize = false;
+                tp.WrapContents = false;
+                tp.Width = flowEpisodeList.Width - 30;
+                tp.Height = 41;
+
+                Label ln = new Label();
+                ln.Text = "S" + eps.SeasonNo.ToString("00") + " E" + eps.EpisodeNo.ToString("00");
+                ln.Text += " " + eps.Name;
+                ln.Font = tfont;
+                ln.Height = 33;
+                ln.Width = tp.Width - 170;
+                ln.Tag = eps.FileFullPath;
+                ln.DoubleClick += ln_DoubleClick;
+                tp.Controls.Add(ln);
+
+                Button butPlayEps = new Button();
+                butPlayEps.Tag = eps.FileFullPath;
+                butPlayEps.Click += butPlayEps_Click;
+                butPlayEps.Text = "Play";
+                tp.Controls.Add(butPlayEps);
+
+                Button butWatchedEps = new Button();
+                butWatchedEps.Tag = eps;
+                butWatchedEps.Click += butWatchedEps_Click;
+                butWatchedEps.Text = "Watched";
+                tp.Controls.Add(butWatchedEps);
+
+                flowEpisodeList.Controls.Add(tp);
+            }
+
+        }
+
+        void ln_DoubleClick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(((sender as Label).Tag as string));
+        }
+
+        void butWatchedEps_Click(object sender, EventArgs e)
+        {
+            SetEpisodesWatchedForProfiles(((sender as Button).Tag as Episode), true);
+            PoplateList();
+        }
+
+        void butPlayEps_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(((sender as Button).Tag as string));
         }
 
         private void SetSeriesRatingForProfiles(Series series, Boolean wantToWatch)
@@ -133,12 +241,44 @@ namespace WatchTower
             WTEntities.SaveChanges();
         }
 
+        private void SetEpisodesWatchedForProfiles(Episode episode, Boolean Watched)
+        {
+            foreach (Profile profile in SelectedProfiles)
+            {
+                ProfileEpisodeRel EpsRel = WTEntities.ProfileEpisodeRels.SingleOrDefault<ProfileEpisodeRel>(
+                    per => per.ProfileId == profile.Id
+                        && per.EpisodeId == episode.Id
+                    );
+                if (EpsRel == null)
+                {
+                    EpsRel = WTEntities.ProfileEpisodeRels.Add(new ProfileEpisodeRel
+                    {
+                        ProfileId = profile.Id,
+                        EpisodeId = episode.Id
+                    });
+                }
+                EpsRel.Watched = Watched;
+
+            }
+            WTEntities.SaveChanges();
+        }
+
         private void PoplateList()
         {
             //Movies
 
 
-            //Episodes                        
+            //Episodes    
+      
+            flowEpisodeList.Visible = false;
+
+            if (SelectedProfiles.Count == 0)
+            {
+                flowLayoutPanelMain.Visible = false;
+                return;
+            } else
+                flowLayoutPanelMain.Visible = true;
+
 
             //***** Filter Un WantedSeries *****    
             //the 3 lists we need to popluate
@@ -163,7 +303,7 @@ namespace WatchTower
                     ).ToList<ProfileSeriesRel>()
                 );
                 WatchedEpisodeRel.AddRange(WTEntities.ProfileEpisodeRels.Where<ProfileEpisodeRel>(
-                    pes => pes.ProfileID == profile.Id
+                    pes => pes.ProfileId == profile.Id
                         && pes.Watched == true
                     ).ToList<ProfileEpisodeRel>()
                 );
@@ -175,13 +315,6 @@ namespace WatchTower
             foreach (var item in WatchedEpisodeRel)
                 UnratedEps.RemoveAll(e => e.Id == item.EpisodeId);
 
-            //get wanttowatch list
-            foreach (var item in WantSeriesRel)
-            {
-                WantedEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
-                UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
-            }
-
             //get don't want to watch list
             foreach (var item in UnWantedSeriesRel)
             {
@@ -189,6 +322,14 @@ namespace WatchTower
                 UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
             }
 
+            //get wanttowatch list
+            foreach (var item in WantSeriesRel)
+            {
+                WantedEps.AddRange(UnratedEps.Where<Episode>(e => e.SeriesId == item.SeriesId));
+                UnratedEps.RemoveAll(e => e.SeriesId == item.SeriesId);
+            }
+
+ 
             //display the 3 list            
             DisplayListInFlowLayout(WantedEps, flowWanted);
             DisplayListInFlowLayout(UnratedEps, flowUnrated);
@@ -238,7 +379,6 @@ namespace WatchTower
              */
         }
 
-
         private void butSettings_Click(object sender, EventArgs e)
         { 
             frmSettings fSettings = new frmSettings(){MainForm = this} ;
@@ -254,11 +394,11 @@ namespace WatchTower
                 CheckBox chkNew = new CheckBox();
                 chkNew.Text = profile.Name;
                 chkNew.Appearance = Appearance.Button;
-                chkNew.FlatStyle = FlatStyle.Flat;
+                chkNew.FlatStyle = FlatStyle.Flat;               
                 chkNew.TextAlign = ContentAlignment.MiddleCenter;
                 chkNew.Tag = profile.Id;
                 chkNew.Height = panelProfiles.Height - 10;
-                chkNew.Left = 5 + chkNew.Left + (panelProfiles.Controls.Count * (chkNew.Width + 5));
+                chkNew.Left = 5 + chkNew.Left + (panelProfiles.Controls.Count * (chkNew.Width + 5));                
                 chkNew.CheckedChanged += chkNew_CheckedChanged;
                 panelProfiles.Controls.Add(chkNew);
                 profilesBut.Add(chkNew);
@@ -267,6 +407,16 @@ namespace WatchTower
 
         void chkNew_CheckedChanged(object sender, EventArgs e)
         {
+            CheckBox chkbox = (sender as CheckBox);
+            if (chkbox.Checked)
+            {
+                chkbox.BackColor = Color.DarkBlue;
+            }
+            else
+            {
+                chkbox.BackColor = Color.WhiteSmoke;
+            }
+
             SelectedProfiles.Clear();
             foreach (CheckBox chk in panelProfiles.Controls)
             {
@@ -280,6 +430,7 @@ namespace WatchTower
         {
             timerUpdateFiles.Interval = 1800000;
             AvailableEpisodes = MediaFunctions.UpdateEpisodesFromFolder(WTEntities);
+            PoplateList();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -293,9 +444,7 @@ namespace WatchTower
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-
-            
+        {         
             WTEntities.ProfileSeriesRels.SingleOrDefault<ProfileSeriesRel>(
                 psr => psr.ProfileId == 1
                     && psr.SeriesId == 51
@@ -305,10 +454,18 @@ namespace WatchTower
             //WTEntities.tests.SingleOrDefault<test>(t => t.Id == 1).name = "x";
             WTEntities.SaveChanges();
 
-            
-
-
         }
+
+        private void flowLayoutPanelMain_Click(object sender, EventArgs e)
+        {
+            flowEpisodeList.Visible = false;
+        }
+
+        private void flowEpisodeList_Leave(object sender, EventArgs e)
+        {
+            flowEpisodeList.Visible = false;
+        }
+
 
     }
 }

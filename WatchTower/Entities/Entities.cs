@@ -105,7 +105,7 @@ namespace WatchTower.Entities
         public Int64 Id { get; set; }
 
         [Required]
-        public Int64 ProfileID { get; set; }
+        public Int64 ProfileId { get; set; }
         [Required]
         public Int64 EpisodeId { get; set; }
         [Required]
