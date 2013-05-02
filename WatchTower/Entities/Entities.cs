@@ -34,6 +34,8 @@ namespace WatchTower.Entities
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
+
+        public virtual ICollection<ProfileEpisodeRel> ProfileEpisodeRel { get; set; }
     }
 
     [Table("Serieses")]
@@ -44,38 +46,29 @@ namespace WatchTower.Entities
 
         [Required]
         public string Name  { get; set; }
-        public virtual ICollection<Episode> Episodes { get; set; }
-        //public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
+        public virtual ICollection<Episode> Episodes { get; set; }        
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
+
+        public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
     }
-
-    public class test
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 Id { get; set; }
-
-        public string name { get; set; }
-    }
-
 
     public class Profile
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
-
         [Required]
         public string Name   { get; set; }
-        //public virtual ICollection<ProfileSeriesRel> ProfileSeriesRels { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
+
+        public virtual ICollection<ProfileEpisodeRel> ProfileEpisodeRel { get; set; }
+        public virtual ICollection<ProfileSeriesRel> ProfileSeriesRel { get; set; }
     }
 
     public class ProfileSeriesRel
@@ -90,8 +83,8 @@ namespace WatchTower.Entities
         [Required]
         public Boolean WantToWatch { get ; set; }
 
-        //public virtual Profile Profile { get; set; }
-        //public virtual Series Series { get; set; }
+        public virtual Profile Profile { get; set; }
+        public virtual Series Series { get; set; }
         
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         //public DateTime DateCreated { get; set; }
@@ -103,18 +96,19 @@ namespace WatchTower.Entities
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int64 Id { get; set; }
-
         [Required]
         public Int64 ProfileId { get; set; }
         [Required]
         public Int64 EpisodeId { get; set; }
         [Required]
         public Boolean Watched { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
+
+        public virtual Episode Episode { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 
     public class WatchTowerEF : DbContext
@@ -126,9 +120,5 @@ namespace WatchTower.Entities
         public DbSet<Episode> Episodes                      { get; set; }
         public DbSet<Series> Serieses                       { get; set; }
         public DbSet<Profile> Profiles                      { get; set; }
-        public DbSet<ProfileSeriesRel> ProfileSeriesRels    { get; set; }
-        public DbSet<ProfileEpisodeRel> ProfileEpisodeRels  { get; set; }
-
-        public DbSet<test> tests { get; set; }
     }
 }

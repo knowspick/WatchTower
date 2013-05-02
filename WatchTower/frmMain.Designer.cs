@@ -102,6 +102,7 @@
             this.flowLayoutPanelMain.Visible = false;
             this.flowLayoutPanelMain.WrapContents = false;
             this.flowLayoutPanelMain.Click += new System.EventHandler(this.flowLayoutPanelMain_Click);
+            this.flowLayoutPanelMain.MouseEnter += new System.EventHandler(this.flowLayoutPanelMain_MouseEnter);
             // 
             // labelWanted
             // 
@@ -128,6 +129,7 @@
             this.flowWanted.Size = new System.Drawing.Size(400, 50);
             this.flowWanted.TabIndex = 0;
             this.flowWanted.WrapContents = false;
+            this.flowWanted.MouseEnter += new System.EventHandler(this.flowWanted_MouseEnter);
             // 
             // label1
             // 
@@ -156,6 +158,7 @@
             this.flowUnrated.Size = new System.Drawing.Size(400, 50);
             this.flowUnrated.TabIndex = 1;
             this.flowUnrated.WrapContents = false;
+            this.flowUnrated.MouseEnter += new System.EventHandler(this.flowUnrated_MouseEnter);
             // 
             // Dpanel
             // 
@@ -216,6 +219,7 @@
             this.flowUnWanted.Size = new System.Drawing.Size(400, 50);
             this.flowUnWanted.TabIndex = 2;
             this.flowUnWanted.WrapContents = false;
+            this.flowUnWanted.MouseEnter += new System.EventHandler(this.flowUnWanted_MouseEnter);
             // 
             // butSettings
             // 
@@ -269,7 +273,7 @@
             this.flowEpisodeList.TabIndex = 18;
             this.flowEpisodeList.Visible = false;
             this.flowEpisodeList.WrapContents = false;
-            this.flowEpisodeList.Leave += new System.EventHandler(this.flowEpisodeList_Leave);
+            this.flowEpisodeList.MouseEnter += new System.EventHandler(this.flowEpisodeList_MouseEnter);
             // 
             // frmMain
             // 
@@ -287,6 +291,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
+            this.MouseEnter += new System.EventHandler(this.frmMain_MouseEnter);
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.flowLayoutPanelMain.ResumeLayout(false);

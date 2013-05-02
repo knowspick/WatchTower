@@ -84,7 +84,6 @@ namespace WatchTower
             return EpsListToDisplay;
         }
 
-
         public void UpdateOrphanEpisodes(WatchTowerEF WTData)
         {
             foreach (Episode EpsItem in WTData.Episodes)
@@ -95,13 +94,6 @@ namespace WatchTower
             WTData.SaveChanges();             
         }
 
-        public List<Episode> GetListOfExstingEpisodes(WatchTowerEF WTData)
-        {
-            List<Episode> EpsList;
-            EpsList = WTData.Episodes.Where(e => e.FileFullPath != "").ToList<Episode>();
-
-            return EpsList;
-        }
     }
     
 }
