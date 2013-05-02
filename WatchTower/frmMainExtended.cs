@@ -11,10 +11,11 @@ namespace WatchTower
 {
     public partial class frmMain
     {
-        #region "Declarations"
+        #region Declarations
         WatchTowerEF WTContext;
         List<Episode> AvailableEpisodes = new List<Episode>();
         List<Profile> SelectedProfiles = new List<Profile>();
+        FlowLayoutPanel SeletedSeriesControl;
 
         Boolean HideEdpisodeList = false;
 
@@ -116,9 +117,10 @@ namespace WatchTower
                 tp.WrapContents = false;
                 tp.Width = 351;
                 tp.Height = 41;
-                tp.Tag = ds;
+                tp.Tag = ds;                
 
                 Label ln = new Label();
+                ln.Name = "number";                
                 ln.Text = ds.epsisodes.Count.ToString();
                 ln.Font = tfont;
                 ln.Height = 33;
@@ -163,10 +165,12 @@ namespace WatchTower
         }
 
         void lname_Click (object sender, EventArgs e) {
+            SeletedSeriesControl = ((sender as Label).Parent as FlowLayoutPanel);
             ShowEpisodeList(((sender as Label).Tag as DisplaySeries).epsisodes);
         }
 
         void ln_Click (object sender, EventArgs e) {
+            SeletedSeriesControl = ((sender as Label).Parent as FlowLayoutPanel);
             ShowEpisodeList(((sender as Label).Tag as DisplaySeries).epsisodes);
         }
 
@@ -259,9 +263,26 @@ namespace WatchTower
         }
 
         void butWatchedEps_Click (object sender, EventArgs e) {
-            ((sender as Button).Tag as Episode).SetWatched(SelectedProfiles, true);
+            //to do: seriesly need to implement this better.
+            //one day when i have time. haha
+            Button but = (sender as Button);
+            Episode eps = (but.Tag as Episode);
+            eps.SetWatched(SelectedProfiles, true);
             WTContext.SaveChanges();
-            PoplateList();
+
+            //remove episode control
+            flowEpisodeList.Controls.Remove(but.Parent);
+            //remove and update list
+            DisplaySeries ds = (SeletedSeriesControl.Tag as DisplaySeries);
+            ds.epsisodes.Remove(eps);
+            if (ds.epsisodes.Count > 0)
+            {
+                Label ln = (SeletedSeriesControl.Controls.Find("number",false)[0] as Label);
+                ln.Text = ds.epsisodes.Count.ToString();
+            }
+            else
+                SeletedSeriesControl.Parent.Controls.Remove(SeletedSeriesControl);
+            
         }
 
         void butPlayEps_Click (object sender, EventArgs e) {
