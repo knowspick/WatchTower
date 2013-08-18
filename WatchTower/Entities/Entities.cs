@@ -17,7 +17,6 @@ namespace WatchTower.Entities
         [Required]
         public Int64 SeriesId       { get; set; }
 
-        //public virtual Series Series { get; set; }
         public Series Series { get; set; }
 
         [Required]
@@ -82,14 +81,14 @@ namespace WatchTower.Entities
         public Int64 SeriesId { get; set; }
         [Required]
         public Boolean WantToWatch { get ; set; }
-
-        public virtual Profile Profile { get; set; }
-        public virtual Series Series { get; set; }
         
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public DateTime DateCreated { get; set; }
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public DateTime LastUpdated { get; set; }        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime DateCreated { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime LastUpdated { get; set; }
+
+        public virtual Series Series { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 
     public class ProfileEpisodeRel
@@ -101,7 +100,10 @@ namespace WatchTower.Entities
         [Required]
         public Int64 EpisodeId { get; set; }
         [Required]
+        public Boolean Played { get; set; }
+        [Required]
         public Boolean Watched { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

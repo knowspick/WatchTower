@@ -73,39 +73,6 @@ namespace WatchTower
              */
         }
 
-        private void flowLayoutPanelMain_Click(object sender, EventArgs e)
-        {
-            HideEpisodeListCheck();
-        }
-
-        private void flowEpisodeList_Leave(object sender, EventArgs e)
-        {
-            HideEpisodeListCheck();
-        }
-
-        private void flowLayoutPanelMain_MouseEnter (object sender, EventArgs e) {
-            HideEpisodeListCheck();
-        }
-
-        private void flowWanted_MouseEnter (object sender, EventArgs e) {
-            HideEpisodeListCheck();
-        }
-
-        private void flowUnrated_MouseEnter (object sender, EventArgs e) {
-            HideEpisodeListCheck();
-        }
-
-        private void flowUnWanted_MouseEnter (object sender, EventArgs e) {
-            HideEpisodeListCheck();
-        }
-
-        private void frmMain_MouseEnter (object sender, EventArgs e) {
-            HideEpisodeListCheck();
-        }
-
-        private void flowEpisodeList_MouseEnter (object sender, EventArgs e) {
-            HideEdpisodeList = true;
-        }
 
     }
 }

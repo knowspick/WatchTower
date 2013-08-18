@@ -17,8 +17,6 @@ namespace WatchTower
         List<Profile> SelectedProfiles = new List<Profile>();
         FlowLayoutPanel SeletedSeriesControl;
 
-        Boolean HideEdpisodeList = false;
-
         public class DisplaySeries
         {
             public Series series;
@@ -29,8 +27,6 @@ namespace WatchTower
         #region Retrieve Series data and apply filters
         private void PoplateList () {
             //Episodes         
-            flowEpisodeList.Visible = false;
-
             if (SelectedProfiles.Count == 0) {
                 flowLayoutPanelMain.Visible = false;
                 return;
@@ -188,44 +184,24 @@ namespace WatchTower
 #endregion
 
         #region Display Episode List
-        private int GetRelativeLeft (Control control) {
-            int RelitiveLeft = control.Left;
-
-            Control parentControl = control.Parent;
-            while (!(parentControl is Form)) {
-                RelitiveLeft += parentControl.Left;
-                parentControl = parentControl.Parent;
-            }
-            return RelitiveLeft;
-        }
-
-        private int GetRelativeTop (Control control) {
-            int RelitiveTop = control.Top;
-
-            Control parentControl = control.Parent;
-            while (!(parentControl is Form)) {
-                RelitiveTop += parentControl.Top;
-                parentControl = parentControl.Parent;
-            }
-            return RelitiveTop;
-        }
-
         void ShowEpisodeList (List<Episode> episodes) {
             flowEpisodeList.Controls.Clear();
-            flowEpisodeList.Left = GetRelativeLeft(flowLayoutPanelMain) + 200;
-            flowEpisodeList.Top = GetRelativeTop(flowLayoutPanelMain) + 5;
-            flowEpisodeList.Width = flowLayoutPanelMain.Width - flowEpisodeList.Left;
-            flowEpisodeList.Height = flowLayoutPanelMain.Height - 10;
-            flowEpisodeList.Visible = true;
             flowEpisodeList.Focus();
-            HideEdpisodeList = false;
 
             Font tfont = new Font("Calibri", 20, FontStyle.Bold);
 
             foreach (Episode eps in episodes) {
                 FlowLayoutPanel tp = new FlowLayoutPanel();
-                tp.BackColor = Color.DarkBlue;
-                tp.ForeColor = Color.LightGray;
+                if (eps.GetPlayed(SelectedProfiles))
+                {
+                    tp.BackColor = Color.LightGray;
+                    tp.ForeColor = Color.DarkGray;
+                }
+                else
+                {
+                    tp.BackColor = Color.DarkBlue;
+                    tp.ForeColor = Color.LightGray;
+                }
                 tp.AutoSize = false;
                 tp.WrapContents = false;
                 tp.Width = flowEpisodeList.Width - 30;
@@ -242,7 +218,7 @@ namespace WatchTower
                 tp.Controls.Add(ln);
 
                 Button butPlayEps = new Button();
-                butPlayEps.Tag = eps.FileFullPath;
+                butPlayEps.Tag = eps;
                 butPlayEps.Click += butPlayEps_Click;
                 butPlayEps.Text = "Play";
                 tp.Controls.Add(butPlayEps);
@@ -286,13 +262,20 @@ namespace WatchTower
         }
 
         void butPlayEps_Click (object sender, EventArgs e) {
-            System.Diagnostics.Process.Start(((sender as Button).Tag as string));
+            //to do: seriesly need to implement this better.
+            //one day when i have time. haha
+            Button but = (sender as Button);
+            Episode eps = (but.Tag as Episode);
+            eps.SetPlayed(SelectedProfiles, true);
+            WTContext.SaveChanges();
+
+            //update ui
+            (but.Parent as FlowLayoutPanel).ForeColor = Color.DarkGray;
+            (but.Parent as FlowLayoutPanel).BackColor = Color.LightGray;
+
+            System.Diagnostics.Process.Start(eps.FileFullPath);
         }
 
-        private void HideEpisodeListCheck () {
-            if (HideEdpisodeList)
-                flowEpisodeList.Visible = false;
-        }
 #endregion
 
         #region Profile Buttons
