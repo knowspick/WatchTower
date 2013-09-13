@@ -12,7 +12,7 @@ namespace WatchTower
     class MediaFunctions 
     {
         //retuns a list episodes that exist on the drive
-        static public List<Episode> UpdateEpisodesFromFolder(WatchTowerEF WTData)
+        /*static public List<Episode> UpdateEpisodesFromFolder(WatchTowerEF WTData)
         {
             List<Entities.Episode> EpsListToDisplay = new List<Entities.Episode>();
             string SeriesName = "";
@@ -83,7 +83,8 @@ namespace WatchTower
             WTData.SaveChanges();
             return EpsListToDisplay;
         }
-
+        */
+        /*
         public void UpdateOrphanEpisodes(WatchTowerEF WTData)
         {
             foreach (Episode EpsItem in WTData.Episodes)
@@ -93,7 +94,7 @@ namespace WatchTower
 
             WTData.SaveChanges();             
         }
-
+        */
     }
     
 }

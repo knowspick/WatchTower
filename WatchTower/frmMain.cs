@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Data.SQLite;
+using ServiceStack.OrmLite;
+using ServiceStack.OrmLite.Sqlite;
 using WatchTower.Entities;
 
 namespace WatchTower
@@ -27,8 +29,8 @@ namespace WatchTower
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            WTContext = new WatchTowerEF();
-            System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
+            //WTContext = new WatchTowerEF();
+            //System.Data.Entity.Database.SetInitializer<WatchTowerEF>(null);
 
             timerUpdateFiles.Interval = 1;
         }
@@ -41,13 +43,13 @@ namespace WatchTower
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            SetProfileButtons();
+            //SetProfileButtons();
         }
 
         private void timerUpdateFiles_Tick(object sender, EventArgs e)
         {
             timerUpdateFiles.Interval = 1800000;
-            AvailableEpisodes = MediaFunctions.UpdateEpisodesFromFolder(WTContext);
+            //AvailableEpisodes = MediaFunctions.UpdateEpisodesFromFolder(WTContext);
             PoplateList();
         }
 
@@ -61,16 +63,13 @@ namespace WatchTower
             flowUnWanted.Visible = !flowUnWanted.Visible;
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {         
-            /*
-            WTContext.ProfileSeriesRels.SingleOrDefault<ProfileSeriesRel>(
-                psr => psr.ProfileId == 1
-                    && psr.SeriesId == 51
-                ).WantToWatch = false;
-
-            WTContext.SaveChanges();
-             */
+        private void testBut_Click(object sender, EventArgs e)
+        {            
+            var dbFactory = new OrmLiteConnectionFactory(@"WatchTower_test.db",false, SqliteDialect.Provider);
+            using (var db = dbFactory.Open())
+            {
+                db.se
+            }
         }
 
 

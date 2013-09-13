@@ -12,7 +12,7 @@ namespace WatchTower
     public partial class frmMain
     {
         #region Declarations
-        WatchTowerEF WTContext;
+        //WatchTowerEF WTContext;
         List<Episode> AvailableEpisodes = new List<Episode>();
         List<Profile> SelectedProfiles = new List<Profile>();
         FlowLayoutPanel SeletedSeriesControl;
@@ -172,13 +172,13 @@ namespace WatchTower
 
         void butDont_Click (object sender, EventArgs e) {
             ((sender as Button).Tag as DisplaySeries).series.SetRating(SelectedProfiles, false);
-            WTContext.SaveChanges();
+            //WTContext.SaveChanges();
             PoplateList();
         }
 
         void butWant_Click (object sender, EventArgs e) {
             ((sender as Button).Tag as DisplaySeries).series.SetRating(SelectedProfiles, true);
-            WTContext.SaveChanges();
+            //WTContext.SaveChanges();
             PoplateList();
         }
 #endregion
@@ -244,7 +244,7 @@ namespace WatchTower
             Button but = (sender as Button);
             Episode eps = (but.Tag as Episode);
             eps.SetWatched(SelectedProfiles, true);
-            WTContext.SaveChanges();
+            //WTContext.SaveChanges();
 
             //remove episode control
             flowEpisodeList.Controls.Remove(but.Parent);
@@ -267,7 +267,7 @@ namespace WatchTower
             Button but = (sender as Button);
             Episode eps = (but.Tag as Episode);
             eps.SetPlayed(SelectedProfiles, true);
-            WTContext.SaveChanges();
+            //WTContext.SaveChanges();
 
             //update ui
             (but.Parent as FlowLayoutPanel).ForeColor = Color.DarkGray;
@@ -282,7 +282,7 @@ namespace WatchTower
         private void SetProfileButtons () {
             //set profile button
             List<CheckBox> profilesBut = new List<CheckBox>();
-            foreach (Profile profile in WTContext.Profiles) {
+           /* foreach (Profile profile in WTContext.Profiles) {
                 CheckBox chkNew = new CheckBox();
                 chkNew.Text = profile.Name;
                 chkNew.Appearance = Appearance.Button;
@@ -295,6 +295,7 @@ namespace WatchTower
                 panelProfiles.Controls.Add(chkNew);
                 profilesBut.Add(chkNew);
             }
+            */
         }
 
         void chkNew_CheckedChanged (object sender, EventArgs e) {
@@ -307,8 +308,10 @@ namespace WatchTower
 
             SelectedProfiles.Clear();
             foreach (CheckBox chk in panelProfiles.Controls) {
+                /*
                 if (chk.Checked)
                     SelectedProfiles.Add(WTContext.Profiles.SingleOrDefault(pro => pro.Id == (Int64)chk.Tag));
+                 */
             }
             PoplateList();
         }

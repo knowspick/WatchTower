@@ -42,11 +42,11 @@
             this.lblNo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.flowUnWanted = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowEpisodeList = new System.Windows.Forms.FlowLayoutPanel();
             this.panelProfiles = new System.Windows.Forms.Panel();
             this.butSettings = new System.Windows.Forms.Button();
             this.timerUpdateFiles = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.flowEpisodeList = new System.Windows.Forms.FlowLayoutPanel();
+            this.testBut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanelMain.SuspendLayout();
@@ -217,6 +217,22 @@
             this.flowUnWanted.TabIndex = 2;
             this.flowUnWanted.WrapContents = false;
             // 
+            // flowEpisodeList
+            // 
+            this.flowEpisodeList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowEpisodeList.AutoScroll = true;
+            this.flowEpisodeList.BackColor = System.Drawing.Color.White;
+            this.flowEpisodeList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowEpisodeList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowEpisodeList.Location = new System.Drawing.Point(522, 6);
+            this.flowEpisodeList.MinimumSize = new System.Drawing.Size(20, 20);
+            this.flowEpisodeList.Name = "flowEpisodeList";
+            this.flowEpisodeList.Size = new System.Drawing.Size(447, 427);
+            this.flowEpisodeList.TabIndex = 18;
+            this.flowEpisodeList.WrapContents = false;
+            // 
             // panelProfiles
             // 
             this.panelProfiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -238,43 +254,25 @@
             // 
             // timerUpdateFiles
             // 
-            this.timerUpdateFiles.Enabled = true;
             this.timerUpdateFiles.Interval = 1800000;
             this.timerUpdateFiles.Tick += new System.EventHandler(this.timerUpdateFiles_Tick);
             // 
-            // button2
+            // testBut
             // 
-            this.button2.Location = new System.Drawing.Point(304, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(36, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // flowEpisodeList
-            // 
-            this.flowEpisodeList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowEpisodeList.AutoScroll = true;
-            this.flowEpisodeList.BackColor = System.Drawing.Color.White;
-            this.flowEpisodeList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowEpisodeList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowEpisodeList.Location = new System.Drawing.Point(522, 6);
-            this.flowEpisodeList.MinimumSize = new System.Drawing.Size(20, 20);
-            this.flowEpisodeList.Name = "flowEpisodeList";
-            this.flowEpisodeList.Size = new System.Drawing.Size(447, 427);
-            this.flowEpisodeList.TabIndex = 18;
-            this.flowEpisodeList.WrapContents = false;
+            this.testBut.Location = new System.Drawing.Point(304, 19);
+            this.testBut.Name = "testBut";
+            this.testBut.Size = new System.Drawing.Size(36, 23);
+            this.testBut.TabIndex = 17;
+            this.testBut.Text = "Test";
+            this.testBut.UseVisualStyleBackColor = true;
+            this.testBut.Click += new System.EventHandler(this.testBut_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 508);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.testBut);
             this.Controls.Add(this.panelProfiles);
             this.Controls.Add(this.butSettings);
             this.Controls.Add(this.tabControl1);
@@ -312,7 +310,7 @@
         private System.Windows.Forms.Panel Dpanel;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblNo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button testBut;
         private System.Windows.Forms.FlowLayoutPanel flowEpisodeList;
     }
 }

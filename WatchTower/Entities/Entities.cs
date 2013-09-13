@@ -112,7 +112,7 @@ namespace WatchTower.Entities
         public virtual Episode Episode { get; set; }
         public virtual Profile Profile { get; set; }
     }
-
+    /*
     public class WatchTowerEF : DbContext
     {
         public WatchTowerEF()
@@ -123,4 +123,5 @@ namespace WatchTower.Entities
         public DbSet<Series> Serieses                       { get; set; }
         public DbSet<Profile> Profiles                      { get; set; }
     }
+     */
 }
