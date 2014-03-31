@@ -1,22 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Data.SQLite;
 using ServiceStack.OrmLite;
-using ServiceStack.OrmLite.Sqlite;
-using WatchTower.Entities;
+using ServiceStack.Common.Utils;
+using WatchTower.POCO;
 
 namespace WatchTower
 {
     public partial class frmMain : Form
     {
+        private System.Data.IDbConnection _db;
+
+        private System.Data.IDbConnection db
+        {
+            get
+            {
+                if (_db == null)
+                {
+                    string SqliteFileDb = @"WatchTower_testx.db".MapAbsolutePath();
+                    var dbFactory = new OrmLiteConnectionFactory(SqliteFileDb, false, SqliteDialect.Provider);
+                    _db = dbFactory.Open();
+                }
+                return _db;
+            }
+        }
+
+        private ProfileController _AllProfiles;
+        private List<Profile> _SelectProfiles;
+
         public frmMain()
         {
             InitializeComponent();
@@ -43,6 +55,7 @@ namespace WatchTower
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
+            _AllProfiles = new ProfileController(db).GetAllProfiles;
             //SetProfileButtons();
         }
 
@@ -64,12 +77,8 @@ namespace WatchTower
         }
 
         private void testBut_Click(object sender, EventArgs e)
-        {            
-            var dbFactory = new OrmLiteConnectionFactory(@"WatchTower_test.db",false, SqliteDialect.Provider);
-            using (var db = dbFactory.Open())
-            {
-                db.se
-            }
+        {
+            _AllProfiles = new ProfileController(db).GetAllProfiles();            
         }
 
 

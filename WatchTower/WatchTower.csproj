@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EpisodeController.cs" />
     <Compile Include="POCO\ProfileSeriesRel.cs" />
     <Compile Include="POCO\Series.cs" />
     <Compile Include="POCO\Episode.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfileController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
